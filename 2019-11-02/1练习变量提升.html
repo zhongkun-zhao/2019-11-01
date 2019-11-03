@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+// **********************************
+//   alert(a)  // function a (){var b = 30;alert(5);}
+//    var a = 10;
+//    function a (){
+//        var b = 30;
+//        alert(5);  // 这个函数没有执行
+//    }
+//    a(); // a这个位置是一个数组 执行会报错
+//    alert(a)// 上面驻了  这个会弹10
+//************************************************
+// alert(a); //function a(){}
+// var a = 10;
+// function a(){
+//     var b = 30;
+//     alert(5);
+// }
+// alert(a);//10
+// a = 30;
+// alert(a);//30
+// var a = function (){
+//     alert(333);
+// }
+// function a(){};
+// a(); //33
+// alert(a);//function (){alert(333)
+// /* 逐行解读代码:
+// a = 10
+// a = 30
+// a = function (){alert(333);} 
+// a = function a(){}
+// */
+//***********************************
+function a(){
+    alert(1);
+}
+a();//333
+var a = function (){alert(a);}
+alert(a);//function (){alert(a);}
+var a = 30;
+alert(a);//30
+var b = function(a){
+    var a = 50;
+    alert(a);
+}
+b(a);// 50
+alert(a);//30    b那个函数里面的 拿不到
+function a(){
+    alert(333);
+}
+alert(a);// 30  上面那个函数解析过了 所以不用管
+/* 
+
+ */
+</script>
+</body>
+</html>
