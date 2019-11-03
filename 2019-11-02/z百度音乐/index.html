@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="baidu.css" />
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="baidu">
+			<ul id="list">
+				<li>
+					<div></div>
+					<span>泡沫</span>
+					<span>邓紫棋</span>
+				</li>
+				<li>
+					<div></div>
+					<span>说爱你</span>
+					<span>蔡依林</span>
+				</li>
+				<li>
+					<div></div>
+					<span>稻香</span>
+					<span>周杰伦</span>
+				</li>
+				<li>
+					<div></div>
+					<span>我的梦</span>
+					<span>张靓颖</span>
+				</li>
+				<li>
+					<div></div>
+					<span>怎么说我不爱你</span>
+					<span>萧敬腾</span>
+				</li>
+				<li>
+					<div>️</div>
+					<span>无处安放</span>
+					<span>白若溪</span>
+				</li>
+			</ul>
+			<div class="select">
+				<span class="selectAll"></span><span>全选</span>
+				<div class="others">
+					<span><em></em>收藏</span>
+					<span><em></em>添加</span>
+					<span><em></em>删除</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		let lists = document.querySelectorAll("#list li");
+		let divs = document.querySelectorAll("#list div");
+		let sp = document.getElementsByClassName("selectAll")[0];
+		for (let i = 0; i < lists.length; i++) {
+			// 隔行变色
+			if (i % 2 === 0) {
+				lists[i].style.backgroundColor = "orange";
+			} else {
+				lists[i].style.backgroundColor = "yellow";
+			}
+			lists[i].onmouseover = function () {
+				color = this.style.backgroundColor;
+				this.style.backgroundColor = "red";
+			}
+			lists[i].onmouseout = function () {
+				this.style.backgroundColor = color;
+			}
+
+
+			/* 循环对号设置开关 加判断条件，如果判断条件是true 就填对号 然后开关取反  注意 这里开关不能赋值 只能取反 不然判断条件会一直是false 不能循坏了 */
+
+			let onoff = true;
+			lists[i].onclick = function () {
+				if (onoff) {
+					divs[i].innerText = "√";
+					color = "red"
+				}
+				else {
+					// 这个就是有对号的时候点击  对号取消 然后如果是偶数行就是orang  奇数行就是yellow。
+					divs[i].innerText = " ";
+					if (i % 2 === 0) {
+						color = "orange";
+					} else {
+						color = "yellow";
+					}
+				}
+				onoff = !onoff;
+
+
+//     让 ary 的每一项加div 里的内容  点击的时候会出现√ ，然后判断 如果全部加上了对号，span 标签就会打对号。
+				let ary = [];
+				divs.forEach((item, index) => {
+					ary.push(item.innerHTML)
+				})				
+				if(ary.every((a) => a === '√')){
+					sp.innerHTML='√'
+				}else{
+					sp.innerHTML=''
+				}
+			}
+		}
+
+
+ /* 点击全选  然后每个div 都加上一个√   
+ 给全选标签加一个点击事件，点击加√。 判断如果加上了对号 循环每个div也加上对号，同时背景颜色变为红色。
+ 如果ff为 fasle 执行else 内容  全选标签变空 同时div变空  颜色实现隔行变色。  
+ */
+		let ff = true;
+		sp.onclick = function () {
+			if (ff) {
+				sp.innerHTML = "√";
+				divs.forEach((a, i) => {
+					a.innerHTML = "√";
+					lists[i].style.backgroundColor = 'red';
+				});
+			}
+			else {
+				sp.innerHTML = "";
+				divs.forEach((a, i) => {
+					a.innerHTML = "";
+					lists[i].style.backgroundColor = i % 2 === 0 ? 'orange' : "yellow";
+				});
+			}
+			ff = !ff
+		}
+
+
+	</script>
+
+</body>
+
+</html>
