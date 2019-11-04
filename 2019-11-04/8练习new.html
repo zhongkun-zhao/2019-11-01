@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>NEW</title>
+</head>
+<body>
+    <script>
+    /* 
+       new 是函数一元运算符，专门（只能）运行函数
+
+       使用new之后会调用函数，就算不加（）也会调用执行。
+
+       使用了new之后，函数的this 就变成了实例，实例就是*空白*对象。
+
+       使用了new之后，函数默认返回值就是实例化对象，就不是undefined。（有没有return都一样）
+
+       如果 return 后面的值为简单数据类型，返回结果还是实例。
+
+       如果 return 后面的值为引用数据类型，返回的结果就是引用数据类型。
+     */
+     function fn(a){
+        alert(this); //new 了之后this 就变成对象
+        console.log(typeof this); //fn{}  
+
+        return [];
+    }   
+    new fn();
+
+    console.log( new fn() );
+
+    console.log(typeof fn); //函数
+    new fn(1); 
+    console.log(new Date)
+
+    console.log(new '');  
+    
+    </script>
+    
+</body>
+</html>

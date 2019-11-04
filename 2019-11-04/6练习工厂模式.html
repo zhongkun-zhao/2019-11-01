@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+        工厂模式为了*批量*生产实例
+
+        函数 目的就是为了复用
+
+    */
+
+    function fn(name,age){
+        // let obj = {
+        //     name:name,
+        //     age:age
+        // } 
+        let obj = {};  //源材料
+
+        obj.name = name;
+        obj.age = age;    //加工
+        return obj; //出厂
+    }
+    let obj = fn('zhuf',10);
+
+    console.log(obj);   //{name: "zhuf", age: 10}
+
+
+
+</script>
+</body>
+</html>
