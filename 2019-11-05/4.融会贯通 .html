@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+      域解析
+        Foo = function(){}
+        var getName = function () {}; 被干掉
+        var a,b,c
+        getName = function(){}  函数
+
+        运行函数中出来的
+        getName = function () {console.log(4);};
+        getName = function () {console.log(1);
+
+    */
+    function Foo() {
+        getName = function () {console.log(1);};
+        return this;
+    }
+    Foo.getName = function () {console.log(2);}; 
+    Foo.prototype.getName = function () {console.log(3);};
+    var getName = function () {console.log(4);};  
+    function getName() {console.log(5);} 
+
+    Foo.getName();  //2
+    getName(); //4
+    Foo().getName(); //1  getName这个值传到window 了
+    getName();//1
+    var a = new Foo.getName(); //2   Foo.getName{}    构造函数下的getName的实例  //2
+    var b = new Foo().getName();//3   //{}.getName()  undefined 执行的Foo.prototype.getName 没返回值就是3.
+    var c = new new Foo().getName //3  
+  /* 第一步第new Foo()，第2步Foo{}.getName 第3步 newFoo {}.getName  第4步 返回3 。  c= Foo.getName{}
+    */  
+    /*
+      
+      new new Foo().getName
+
+      new Foo() -> Foo{} -> {}.getName
+
+      {
+        __proto__ : Foo.prototype
+      }
+
+      Foo.prototype.getName = function () {console.log(3);};
+
+
+      new new Foo().getName = function () {console.log(3);}
+
+
+      new Foo().getName {} -> Foo{}.getName{}
+      
+    */
+    console.log(a,b,c);//Foo.getName,undefined ,Foo.getName
+</script>
+</body>
+</html>
