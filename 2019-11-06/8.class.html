@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            class 类名 {
+                constructor(){
+                    //给自身添加属性或者方法，就必须要写constructor
+                }
+            }
+        */
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+            say() {
+                console.log(this.name);
+            }
+        }
+        // person.prototype.hah = 10;
+        Person.prototype = {   //如果使用类那么不能直接修改类的原型地址
+            haha: 10
+        }
+        let p = new Person('哈哈');
+        p.say();//  哈哈
+        console.log(p.haha);// uvdefiend 没有这个haha的属性
+        console.dir(p);
+
+        function fn(){
+        console.log(3);
+      }
+      let obj = {
+        fn
+    }
+    obj.fn();
+    </script>
+</body>
+
+</html>
