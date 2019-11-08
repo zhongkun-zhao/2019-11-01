@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        面向对象特征：
+            封装、多态、继承。
+        
+            继承：
+                子类具有父类的一部分特征（从父类继承下来的），自己还有自己的特征。
+            作用：
+                继承的写法可以让子类代码减少很多，从而达到高内聚低耦合的目的。
+            继承的方式很多：
+                类式继承（call继承）
+                原型继承
+                寄生式组合继承
+                对象继承
+                class继承、
+                .....等
+            目的：
+                继承的最后结果就是继承父类的属性和方法。
+            属性继承/类式继承：
+                调用父类，通过call把this变为子类的实例即可（call继承） 
+            ```
+            function Police (name,age){
+                //this -> 实例
+                Person.call(this,name,age);
+                console.log(this);
+            }
+            ```
+            方法继承：
+                通过浅拷贝，把父类上原型的方法或者属性都赋值给子类的原型
+               Object.assigin(子类.prototype,父类.prototype)             
+        
+            
+           
+        
+        */
+
+        /* function person(name,age){
+            this.name = name;
+            this.age = age;
+            tihs.job = '警察'
+        }
+        person.prototype.say = function(){
+            console.log ('我的名字'+this.name);
+           
+        }
+            let p1 = new person('赵',18);
+            p1.say();//我的名字赵
+         */
+
+
+        /* function police (name,age,job){
+            this.name = name;
+            this.age = age;
+            this.job = job;
+        }
+        police.prototype.say = function(){
+            console.log('我的名字'+this.name);
+        }
+        police.prototype.techang = function(){
+            console.log(this.name +'特长');
+        }
+        let p2 = new police('zhao',18,'学习使我快乐')
+        p2.say();//我的名字zhao 
+        */
+        function Person(name,age){
+          this.name = name;
+          this.age = age;
+         }
+       
+        Person.prototype.say = function(){
+         console.log(`我的名字叫`+this.name);  
+        }
+        function Police (name,age){
+        //this -> 实例
+          Person.call(this,name,age);   
+        }
+
+        
+        /*  Police.prototype = Person.prototype;
+            这种方法不可取 这样如果改变Police.prototype下的方法，Person.prototype;的方法也会变
+        */
+        Object.assign(Police.prototype,Person.prototype);// 浅克隆，这种改变Police.prototype,下的方法不会改变Person.prototype的方法
+
+        Police.prototype.say = function(){
+        console.log(`我是警察`);       
+        }
+        
+       let p2 = new Police('哈哈',1);
+       let p1 = new Person('zhao',18);
+        p2.say();//我是警察
+        p1.say();//我的名字叫zhao
+
+
+    </script>
+</body>
+
+</html>

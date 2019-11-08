@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  /* 
+  如果不是赋址，是赋值就解决了这个问题
+  
+  Object.assign  浅拷贝
+
+  Object.assign(obj2,obj1,obj0)
+  从右往左浅拷贝对象的属性,可以放若干对象
+  
+   
+*/
+
+/* let prototype1 = {
+    say(){
+        console.log('我想做个好人');       
+    }
+}
+let prototype2 = {};
+Object.prototype.aaa = 10;
+//for in会枚举当前对象原型下的属性或者方法，使用hasOwnProperty就能只找对象自身的属性了,所以加判断如果不加就会把对象 aaa = 10 这个方法也枚举过来。
+for(let attr in prototype1){
+  if(prototype1.hasOwnProperty(attr)){
+      prototype2[attr] = prototype1[attr];
+  }
+}
+// 来一波浅拷贝
+Object.assign(prototype2,prototype1);
+prototype2.say =  function(){
+        console.log('对不起，我是警察')
+    }
+    prototype1.say();//我想做个好人
+    prototype2.say();//对不起，我是警察
+ */
+
+/* 
+浅克隆
+let ary = [1,2,3,[1]]; 
+let ary2 = [];
+for(let i=0;i<ary.length;i++){
+    ary2[i] = ary[i];
+}
+ary2.push(5);
+
+ ary2[3].push(2);// 这里改吧地址中的改了[1, 2]
+
+ console.log(ary);[1, 2, 3,[1, 2]]// ary2 克隆了1的 数组第3个的一个地址，所以改ary2的3个地址也会改ary。
+ console.log(ary2);// [1, 2, 3, [1, 2], 5]
+  */
+
+ /*  
+ //深克隆
+  let ary = [1,2,3,[1,2,3,{name:[1,2,3]}]];
+  function deepclone(obj){
+    // 先看obj 是不是一个对象，不是就不执行deepclone
+    if(typeof obj !== 'object' && obj !== null)
+     return null;
+     let a = obj.push?[]:{};
+     for(let attr in obj){
+         if(typeof obj[attr] === 'object'){
+             a[attr] = deepclone(obj[attr])
+         }else{
+             a[attr] = obj[attr];
+         }
+     }
+     return a;
+  }
+  let ary2 = deepclone(ary);
+  console.log(ary2);
+ */
+
+ /* 
+ 深克隆
+  let ary2 = JSON.parse(JSON.stringify(ary))
+ */
+
+/* 
+let ary = [1, 2, 3, [1, 2, 3, { name: [1, 2, 3] }]];
+//深度克隆
+function deepclone(obj) {
+    //看看obj是不是一个对象，不是对象就不执行deepclone
+    if (typeof obj !== 'object' && obj !== null) return null;
+    // let o = Array.isArray(obj)?[]:{};
+    let a = obj.push ? [] : {}; //确认传进来的值到底是数组还是对象
+    for (let attr in obj) {
+        //如果碰到了引用类型就继续循环，原始类型才赋值
+        if (typeof obj[attr] === 'object') {
+            a[attr] = deepclone(obj[attr]);
+        } else {
+            a[attr] = obj[attr];
+        }
+    }
+    return a;
+}
+let ary2 = deepclone(ary);
+console.log(ary2);
+ */
+
+
+</script>
+</body>
+</html>
