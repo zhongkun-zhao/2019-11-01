@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+
+<body>
+    <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);" data-name="time">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);" data-name="hot">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);" data-name="price">
+                <i class="up"></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <section name="" id="sele">
+                    <option value="hot">按照热度所搜</option>
+                    <option value="price">按照价格搜索</option>
+                    <option value="hot">按照文字所搜</option>
+                </section>
+                <input type="text">
+                <button id="search">搜索</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul"></ul>
+    </section>
+    <script>
+        // 先进行ajax 请求，固定写法
+        fetch('./json/product.json')
+        .then(d=>d.json())
+        .then(data=>{
+        // 这里的data就是请求来的数据，后台是真没类型就是什么类型，这里给的是 数组类型
+        let newdata = data.concat();
+       // 复制一份新的数组，这样操作的时候就不会影响原理数组
+        // 开始渲染数组
+        function render(newdata){
+        // 创建一个变量区接收，循环数组的每一项，然后进行结构赋值。
+        let lis = newdata.map(({img,title,price,time,hot})=>{
+            return(
+    `<li>
+            <img src="${img}" alt="">
+    <p>商品名称:<span>${title.substr(0,6)}</span></p>
+        <p>上架时间:<span>${time}</span></p>
+        <p>商品热度:<span>${hot}</span></p>
+        <p>商品价格::<span>${price}</span></p>
+    </li>`
+            );
+           }).join('')
+        // 结构赋值的数据为数组类型，需要转成字符串类型来操作。    
+           ul.innerHTML = lis;
+    }
+    render(newdata);// 需要执行
+    // 获取 a标签。
+    const a = document.querySelectorAll('a')
+    a.forEach((ele,i)=>{
+        //每个A都添加了一个自定义属性
+        ele.onoff = true; //默认从小到大。
+        ele.onclick = function(){
+         if(this.onoff){
+            newdata.sort((a,b)=>{
+                // 判断下是不是时间类型，是的话需要转为时间戳区排序
+              if(this.dataset.name === 'time'){
+                  // 默认的从小到大
+                  return new Date(a.time) - new Date(b.time)
+              }
+              return a[this.dataset.name] - b[this.dataset.name];
+            });
+            // 让第一个三角的样式出来，第2个隐藏。
+            this.children[0].classList.add('activet');
+            this.children[1].classList.remove('activeb');
+            
+           
+         }else{
+             // 否则取反。
+            newdata.sort((a,b)=>{
+              if(this.dataset.name === 'time'){
+                  return new Date(b.time) - new Date(a.time) 
+              }
+              return b[this.dataset.name] - a[this.dataset.name] ;
+            });
+            
+            this.children[0].classList.remove('activet');
+            this.children[1].classList.add('activeb');
+          
+         }
+         this.onoff = !this.onoff;
+            render(newdata);
+
+        }
+    });
+     
+     });
+         
+                
+    </script>
+
+</body>
+
+</html>
