@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+    你在电脑前看这段文字，
+    写文字的人在百度等你。
+    N年前你来到了这个世界，
+    N年后你想改变世界。
+          
+    期待你脚踏祥云，
+    与百度一起改变世界。
+    
+        */
+        /*  let num = 123;
+         num.a = 10;
+         console.log(num.a);//undefined 简单数据类型除了null和undefined添加自定义属性就undefined。ull与undefined添加获取属性会报错
+         */
+
+        /* 
+        = 号就是赋值
+        简单数据类型就是把右边的数据赋值（你是你的，我是我的，修改你不会影响我）
+        引用类型赋址操作（你的是我的，我的还是我的，修改你会影响我）
+    
+        为什么要拷贝？
+        因为引用类型的赋值是赋址，即不想进行赋址，操作又想拿到另一个引用类型的数据
+         */
+
+        /* 
+         let ary = [1,2,3];
+         let ary2 = [];
+         for(let i=0;i<ary.length;i++){
+             ary2[i] = ary[i];
+         }
+        console.log(ary2);//[1, 2, 3]
+         */
+
+/* 
+let ary = [1, 2, 3, [4]];
+function deepClone(ary) {
+    let ary2 = [];
+    for (let i = 0; i < ary.length; i++) {
+        if (ary[i] !== null && typeof ary[i] === 'object') {
+            ary2[i] = deepClone(ary[i])
+        } else {
+            ary2[i] = ary[i]; //简单类型就是赋值 
+        }
+    }
+    return ary2;
+}
+ary2 = deepClone(ary);
+console.log(ary2); 
+*/
+
+/*
+ let ary = [1, 2, 3, [4]];
+function deepClone(a) {
+    let obj = a.push?[] : {};
+    for(let attr in a){
+        if(a[attr] !== null && typeof a[attr] ==='object'){
+            obj[attr] = deepClone(a[attr]);
+        }else{
+            obj[attr] = a[attr]
+         }
+    }
+    return obj;
+}
+let ary2 = deepClone(ary);
+console.log(ary);
+ */
+</script>
+
+
+</body>
+
+</html>

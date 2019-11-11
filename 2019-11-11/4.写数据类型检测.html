@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     /*
+        如何检测一个变量是什么类型的？
+        [] -> typeof 'object'
+
+        Object.prototype.toString.call(数据) === 
+    */   
+    
+    class Tools{
+        static type(data){ // data 是传的需要检测的数据
+            if( typeof data !== 'object'){
+                return typeof data;// 如果不是对象类型，直接检测
+            }
+            // 如果是对象类型，还要看是 普通对象 、数组对象、或者空。
+            let obj = {
+                object :'Objiect',
+                array : 'Array',
+                null : 'Null'
+            }
+            let tos = Object.prototype.toString;
+            for(let attr in obj){
+                // 看看检测的类型是对象中的哪一个类型 直接return。
+                if(tos.call(data) === `[object ${obj[attr]}]`){
+                    return attr 
+                }
+            }
+
+        }
+    }
+    console.log( Tools.type([]) );//array
+
+
+
+    //****************************
+    class Tools {
+        static type(data){//传的是数据，然后通过这个数据检测它的类型
+           
+            if(typeof data !== 'object'){
+                return typeof data;
+            }
+            // let ary = ['Null','Array','Object'];
+            // let ary2 = ['null','array','object'];
+            //{object:'Object'}
+            let obj = {
+                object:'Object',
+                array:'Array',
+                null:'Null'
+            }
+            let toS = Object.prototype.toString;
+            for(let attr in obj){
+                if(toS.call(data) === `[object ${obj[attr]}]`){
+                    return attr;
+                }
+            }
+            // for(let i=0;i<ary.length;i++){
+            //     if(toS.call(data) === `[object ${ary[i]}]`){
+            //         return ary[i].toLowerCase();
+            //     }
+            // }
+        }
+    }
+    console.log( Tools.type([]) );//array
+    </script>
+</body>
+</html>
