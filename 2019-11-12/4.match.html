@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/* 
+  string.match(//)  是字符串方法
+      找到正则匹配的字符，并且把它们放到数组中（返回的是数组）
+    跟exec类似
+    懒惰特性：
+       让他找1个就找一个 不会找第2个。
+    贪婪特性： 
+      只要符合某个柜子就不停找。知道找不到为止。
+
+
+ 修饰符 ：
+        i : 忽略大小写  ignoreCase
+        m : 多行匹配  mutiline
+        g : 全局匹配  global
+ */
+let str = 'aaasdasd6123456erwe85216'
+console.log(str.match(/\d/)); //["6", index: 8, input: "aaasdasd62er", groups: undefined]
+console.log(str.match(/\d/g));//["6", "1", "2", "3", "4", "5", "6", "8", "5", "2", "1", "6"]
+console.log(str.match(/\d+/g));// ["6123456", "85216"]
+
+
+let str1 = '12z34561Z17z89'
+//查找全局是否有z 不管大写或者小写
+console.log(str1.match(/z/ig));//["z", "Z", "z"]
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /* 
+    正则身上的方法：
+          /  /.exec（字符串） 找到正则匹配的字符串（首次出现的字符【就一次】），并放到数组中（只找1次）
+         
+         /  /. test(字符串)
+            查看字符串中是否有符合规则的匹配项，如果有就是true，没有就是flase
+    
+    特殊转意符：
+          \d ：代表了 0-9之间的数字 （一个）
+    
+    量词：
+         + : 代表 前边的字符出现 1或多次（最少出现一次，最多不限。）
+         
+    修饰符 ：
+        g : 全局匹配  global
+     */
+     console.log(typeof /a/);//object
+    console.log(Object.prototype.toString.call(/a/));//[object RegExp]
+    
+    let str = 'dh8137289371299dx1';
+    console.log(/\d/.exec(str));//["8", index: 2, input: "dh8137289371299dx1", groups: undefined]
+    console.log(/\d+/.exec(str));//["8137289371299", index: 2, input: "dh8137289371299dx1", groups: undefined]
+  
+     /*
+        ["8", index: 2, input: "dh8137289371299dx1", groups: undefined]
+
+        '8'为找到的字符
+        index: '2'首次出现的位置
+        input:整个字符
+        groups:undefined
+        length:1  (因为找的是'1'这个字符串)
+    */
+
+    let str2 = 'dh8137289371299zdx1'; 
+    console.log(/z/.test(str2))//true 找当前字符串中是否有z这个字符
+</script>
+</body>
+</html>

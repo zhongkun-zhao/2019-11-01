@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+ /*  
+ string.replace(''或者正则,'替换的字符串'或者函数) 替换
+ 
+ replacede 的细节
+ 默认情况下，函数的
+          第一个参数是每次匹配的字符
+          第二个参数是配些字符串的索引
+          第三参数是整个字符串
+          第四个参数undefiend
+ */   
+ 
+ str = '床前明月光，疑是地上霜，举头望明月，低头思故乡'
+  
+  aa = str.replace(/床|地上|明月|思故乡/g,function($0){
+    //    console.log($0);//床 明月 地上 明月 思故乡
+       let map = '';
+       for (let i=0; i<$0.length; i++){
+           map +='*';
+       }
+       return map
+   });
+   console.log(aa);//*前**光，疑是**霜，举头望**，低头***
+   
+</script>
+</body>
+</html>

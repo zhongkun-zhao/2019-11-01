@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/* 
+[ab]  ：代表a或者b
+在[]中的字符在正则中是找任一个字符
+[123],[1-4]  -> 1或者2或者3或者4
+
+^字符串开头
+$字符串结尾
+^ + $ = 整个字符串都要符合我的规则
+
+中文的区间范围：
+  [\u4e00-\u9fa5]
+*/
+
+let str = 'a1sA2bC3de4g'
+let aa = str.match(/[A-Za-z]\d[A-Za-z]/g) 
+console.log(aa);
+
+// 筛选16-108的数 
+let str1 = '108'
+console.log(/^(1[6-9]|[2-9][0-9]|10[0-8])$/.test(str1)); // 注意空格
+
+
+//计算出下列的字符字节，假设英文是1个字节，中文是2个字节。
+let str3 = '大家好，我是渣渣，在座的都是垃圾，yes！'
+let num = 0;
+for(let i=0; i<str3.length; i++){
+  if(/[\u4e00-\u9fa5]/i.test(str3[i])){
+    num+=2;
+  }else{
+    num ++;
+  }
+}
+console.log(num);
+
+  // for(let i=0;i<str.length;i++){
+    //     if(/[a-z.,!]/i.test(str[i])){
+    //         num++;
+    //     }else{
+    //         num += 2;
+    //     }
+    // }
+
+
+</script>
+</body>
+</html>

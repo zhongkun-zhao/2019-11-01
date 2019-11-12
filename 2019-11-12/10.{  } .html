@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /* 
+    {} 代表量词，描述{}前面字符的数量
+    {m,}最少m个 最多不限
+    + -> {1，}
+    {m,n} ->{2,5}
+    {n} 最少出现n次，最多也是出现n次
+    ? 最少可以没有，最多出现1次 -> {0,1}
+    * 最少可以没有，最多无限 -> {0,}
+
+      量词元字符：一般都是用在了其他元字符的后边 
+        ?   ： 代表 前边的字符出现 0或1次
+        +   :  代表 前边的字符出现 1或多次
+        *   :  代表 前边的字符出现 0或多次
+        {n} ： 代表 前边的字符出现 n次
+        {n,m} ： 代表 前边的字符出现 n到m次
+        {n,} ： 代表 那边的字符出现 n到多次
+     */
+
+
+     let str = 'a12c34a5c666a789cac'
+      console.log(str.match(/a\d{0,3}c/g));// ["a12c", "a5c", "a789c", "ac"]
+      console.log(str.match(/a\d{2}c/g));//["a12c"]
+      console.log(str.match(/a\d?c/g));//["a5c", "ac"]
+      console.log(str.match(/a\d*c/g));//["a12c", "a5c", "a789c", "ac"]
+      console.log(str.match(/a\d+c/g));// ["a12c", "a5c", "a789c"]
+      
+</script>
+</body>
+</html>
