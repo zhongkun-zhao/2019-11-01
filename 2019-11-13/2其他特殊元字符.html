@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/* 
+\s 一个空格
+\S 一个非空格
+\b 一个边界符
+\B 一个非边界符
+\w 一个数字、字母、下划线
+\W 一个非数字、字母、下划线
+trim()去掉前后空格
+*/
+let  str = '13050985622'
+console.log(/^1[3-9]\d{9}$/.test(str));//true
+
+let str1 = '602899280'
+console.log(/^[1-9]\d{4,10}$/.test(str1));//true
+
+let str2 = '  d n f  ';
+console.log(str2.replace(/^\s+|\s+$/g,''));//d n f
+console.log(str2.replace(/\S+/g,'*'));
+
+/* 
+英文字符串开头有一个边界符，字母与字母之间没有边界符，如果有空格有边界，中文的左边有边界符
+中文符号两边有边界符，整个字符串都是中文 没有边界符。
+*/
+
+let str3 = '中文a s，。adbf中adz x中文'
+console.log(str3.replace(/\b/g,'|'));// 中文|a| |s|，。|adbf|中|adz| |x|中文
+
+
+
+    
+
+
+</script>
+</body>
+</html>

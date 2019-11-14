@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/* 
+\w     ：代表了 数字 字母  下划线；
+\W     ：代表除了 数字 字母 下划线 之外的任意zi符 
+*/
+
+let str = 'zhongkunzhao@163.com'
+console.log(/^[a-zA-Z][\w.-]{5,17}@[0-9a-zA-Z]{2,5}\.c(om|on)$/.test(str));
+// true  首位为字母，后最少5位最多17位 为数字 字母  下划线。
+//**^ & 这个表示需要匹配的整个字符串都是符合开头 结尾的样式。而不是获取到的东西符合开头结尾的规则**
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="li clear">1</li>
+        <li>2</li>
+        <li class="li">3</li>
+    </ul>
+    <script>
+ /* let li = document.getElementsByTagName('li');
+        for(let i=0; i<li.length; i++){
+          console.log(li[i].className);
+          if(li[i].className === 'li'){
+            li[i].style.background = 'red';      
+          };
+        };
+ */
+/*   
+  function fn(name){
+      // 找到页面中多有的标签
+      let str = document.getElementsByTagName('*')
+      console.log(str);//是个数组
+      let ary2 = [];
+      for(let i=0; i<str.length; i++){
+        let ary3 = str[i].className;
+        // console.log(ary3);
+        //class标签  ['li','clear'],['li'],['a']
+        let ary4 = ary3.split(',')
+        //console.log(ary4);//是个数组
+        ary4.forEach(ele =>{
+         if(ele === name){
+             ary2.push(str[i])
+         }    
+     });
+     }
+     return ary2;  
+  }
+ let lis= fn('li')
+ console.log(lis);//[li.li]
+ for(let i=0; i<lis.length; i++){
+     lis[i].style.background = 'red'
+ }
+  */
+
+  function fn(name){
+    let aa = document.getElementsByTagName('*');
+    let bb = [];
+    let cc = new RegExp('\\b'+name+'\\b');
+    console.log(cc);   
+      for(let i=0; i<aa.length; i++){
+          if(cc.test(aa[i].className)){
+              bb.push(aa[i]);
+          }
+      }
+      return bb;
+    }
+
+    let lis = fn('li')
+    console.log(lis);
+    for(let i=0;i<lis.length;i++){
+        lis[i].style.background = 'red';
+    }
+
+    
+    </script>
+</body>
+</html>

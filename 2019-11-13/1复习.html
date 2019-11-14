@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复习</title>
+</head>
+<body>
+<script>
+    /*  \d     ：代表了 0-9之间的数字
+        \D     ：代表除了 0-9 的任意字符； 
+        
+        ?=  前瞻仰
+        ?<= 后瞻仰
+        ?!  负前瞻仰
+        ?<! 负后瞻仰     
+        
+    */
+
+    let str = '2019****11-13'
+    console.log(str.match(/(\d+)\D+(\d+)\D(\d+)/));// ["2019****11-13", "2019", "11", "13", index: 0, input: "2019****11-13", groups: undefined]
+
+    let str2 = '好人坏人好人不是人中国人';
+    //sunstr(a,b)从索引a开始截取b个，返回截取的字符串。
+    console.log(str2.replace(/好人/g,($0)=>$0.substr(0,1)+'好'));//好好坏人好好不是人中国人
+     // ?<= 后瞻仰
+    console.log(str2.replace(/(?<=好)人/g,'hao'));////sunstr(a,b)从索引a开始截取b个，返回截取的字符串。
+     // ?= 前瞻仰
+    console.log(str2.replace(/好(?=人)/g,'ren'));//ren人坏人ren人不是人中国人
+    
+    
+    
+
+        
+</script>
+</body>
+</html>
