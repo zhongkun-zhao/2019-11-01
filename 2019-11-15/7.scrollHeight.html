@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea  id="txt"  ></textarea>
+    <button id="btn">获取txt高度</button>
+    <script>
+    /* 
+    scrollWidth/Height 被内容撑开的高度不算边框。
+        */
+    btn.onclick = function(){
+         console.log(txt.clientHeight);// 算pd 不算border
+         console.log(txt.offsetHeight);// 算pd 算border
+         
+        console.log(txt.scrollHeight);//被内容撑开的高度，不算边框。
+        
+    }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+div{
+    padding:100px;
+}
+#box{
+    background: red;
+    _position: relative;
+}
+#box1{
+    background: green;
+    position: relative;
+    border:50px solid rgb(236, 240, 29);
+}
+#box2{
+    background: skyblue;
+    position: absolute;
+    top:150px;
+    border:50px solid rgb(207, 18, 81);
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2"></div>
+        </div>
+    </div>
+<script>
+    /*
+        offsetLeft/offsetTop在实际中(页面复杂的情况下，要慎用，获取的距离是根据定位父级来的)
+
+        绝对位置才是最稳的一个距离（当前元素到页面顶部的距离）
+
+        思路:
+            求得绝对位置，就是把当前元素的所有祖先节点的距离计算一遍，求和即可
+
+        具体实施:
+            1.先定义一个元素（作为当前元素）
+            2.先求当前元素的距离（包含定位距离和边框距离）
+            3.把这次的定位父级变成下一次循环的当前
+    */
+   console.log(box2.offsetLeft);//100
+   console.log(box2.offsetParent);//box1
+
+ /*   let now = box2;
+   let l = 0;
+   while (now) {
+     l+= (now.offsetLeft+now.clientLeft)   
+     now = now.offsetParent;    
+   }
+     l = l- box2.clientLeft;
+   console.log(l);//258 */
+   
+
+  class Tools{
+      position(now){
+          let l = 0;
+          let T = 0;
+          let l1 = now.clientLeft;
+          let T1 = now.clientTop;
+          while (now) {
+              l += (now.offsetLeft +now.clientLeft);
+              T += (now.offsetTop + now.clientTop);
+              now = now.offsetParent;
+          };
+          l = l-l1;
+          T = T-T1;
+          return{l,T};
+      };
+  };
+   let t1 = new Tools;
+   let {l,T} = t1.position(box2);
+   console.log(l,T);//258 308
+   
+
+
+/* class Tools {
+        position(nowEle){
+            let l = 0;
+            let t = 0;
+            let cl = nowEle.clientLeft;
+            let ct = nowEle.clientTop;
+            //只要有当前这个元素就一直循环
+            while(nowEle){
+                l += (nowEle.offsetLeft + nowEle.clientLeft);
+                t += (nowEle.offsetTop + nowEle.clientTop);
+                nowEle = nowEle.offsetParent; //把本次的定位父级变成，下次循环的当前元素。
+            }
+            l = l - cl;
+            t = t - ct;
+
+            return {
+                l,
+                t
+            }
+        }
+    }
+
+
+    let t1 = new Tools;
+    let {l,t} = t1.position(box2);
+    console.log(l,t); */
+
+
+</script>    
+</body>
+</html>
