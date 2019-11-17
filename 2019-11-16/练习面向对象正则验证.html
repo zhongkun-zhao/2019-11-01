@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contain {
+            width: 400px;
+            height: 400px;
+            border: 1px solid yellowgreen;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 60px 30px 30px 30px;
+            box-sizing: border-box;
+        }
+
+        #contain div {
+            margin-bottom: 30px;
+        }
+
+        #contain div span {
+            font-size: 20px;
+            color: #555;
+            width: 80px;
+            display: inline-block;
+        }
+
+        #contain div input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid yellowgreen;
+        }
+
+        #btn {
+            display: block;
+            outline: none;
+            width: 100px;
+            height: 40px;
+            border: 1px solid yellowgreen;
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            cursor:no-drop;
+            _cursor: pointer;
+            color: #555;
+
+        }
+
+        #contain .ok {
+            border-color: yellowgreen;
+        }
+
+        #contain .error {
+            border-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="contain">
+    <div id="qq">
+        <span>QQ：</span>
+        <input type="text" data-name="qq" placeholder="请输入QQ">
+    </div>
+    <div id="email">
+        <span>Email：</span>
+        <input type="text" data-name="email" placeholder="请输入邮箱">
+    </div>
+    <div id="mobile">
+        <span>Mobile：</span>
+        <input type="text" data-name="phone" placeholder="请输入手机号码">
+    </div>
+    <div id="date">
+        <span>Date：</span>
+        <input type="text" data-name="birth" placeholder="请输入生日">
+    </div>
+
+    <p><input type="submit" value="注册" id="btn"></p>
+
+</div>
+<script>
+/*
+    设置一个时间，如果设置的时间不等于输入的时间就是错误的时间
+
+    1.输入内容去监听用户输入的内容是否为正则匹配项
+    2.生日（精度匹配）
+
+    oninput  当用户输入内容的时候触发事件
+*/
+    // console.log(new Date('2019-11-31'));
+
+    /*
+        开头为字母，数字，字母，下划线 6-12@231.com 
+        2019-10-10
+    */
+   class person{
+       constructor(){
+           this.txts = document.querySelectorAll('input[type="text"]');
+         //console.log(this.txts);//[input, input, input, input]  获取到这几个input 为txt的
+           this.zz = {
+            qq:/^[1-9]\d{4,10}$/,
+                email:/^[a-zA-z]\w{5,11}@[1-9a-z]{2,10}(\.c(om|n)){1,2}$/,
+                phone:/^1[3-9]\d{9}$/,
+                birth:/^(\d+)\D+(\d+)\D+(\d+)\D?$/
+           }
+           this.events()
+       };
+       events(){
+           let that = this;//这里的tihs值得是构造函数
+           //console.log(that);
+           this.txts.forEach((ele,i)=>{
+               ele.oninput = function(){
+                   // 这里的this是指循环的每一项txt；
+                   let datename = this.dataset.name;
+                   // console.log(datename);
+                   let r = that.zz[datename]
+                  // console.log(r);
+                   
+                   if(r.test(this.value)){
+
+                   if(that.fn(datename,this.value)){
+                     this.className = 'ok';
+                   }else{
+                    this.className = 'error';
+                   }
+
+                      
+                   }else{
+                       this.className = 'error';}                  
+               }
+           });    
+       };
+
+    /*
+    1.有没有超过现在的时间
+    2.当前的时间是否合法
+*/
+
+    fn(type,val){
+      switch(type){
+          case 'birth':
+          let d = new Date();
+          let ary = val.match(/\d+/g);// 这里ary为一个数组，new Date只能钮字符串。格式为2019 11 11.
+          let D = new Date(ary.join(' '));
+          if((d-D)>0){//只有转为时间 才能拿判断输入时间是否大于现在时间。
+            // get  32日会获取下月1日
+            let y = D.getFullYear();// 获取new Date 的年对应的字符串
+            let m = (D.getMonth() + 1); 
+            let date = D.getDate();
+            if(y == ary[0] && m == ary[1] && date == ary[2]){
+                return true;// 
+            }else{
+                return false
+            }
+
+          }else{
+              return false// 这里如果填写未来世界 就会有这个结果
+            }
+
+            return false; 
+        } 
+  
+      return true;
+    }
+
+
+   }
+    new person();
+
+    
+    
+
+
+    
+
+
+    
+
+
+
+    
+
+
+
+
+
+</script>
+</body>
+</html>

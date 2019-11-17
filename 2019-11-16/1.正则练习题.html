@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/* 
+    let obj = {
+        name : '赵',
+        age : 18,
+        say :'不忘初心方得始终',
+    }
+    let str  = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+
+    let s = str.replace(/{(\w+)}/g,(...arg)=>{
+         //得到的是一个数组 数组对象结果赋值  我们要要数组第2项 就是第一个括号
+        let [key0,key1] = arg   
+        return obj[key1] // 替换为obj中对象的每一项，循环一次替换一次。
+    })
+    console.log(s);//我的名字叫赵,年龄是18岁,我想说:不忘初心方得始终
+     */
+
+     let str2 = 'hdd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+/* 
+       let obj = {};
+       for(let i=0; i<str2.length; i++){
+           if(!obj[str2[i]]){
+               obj[str2[i]] = 1
+           }else{
+               obj[str2[i]]+= 1
+           }
+       }
+       console.log(obj);
+        
+        let k = '';
+       let max = -Infinity
+       for(let attr in obj){
+            if(obj[attr]>max){
+                max = obj[attr];
+                k  = attr;
+            }
+       }
+       console.log(max);// 17  最多的次数
+       console.log(k);// a   这个就是a
+        */
+
+        
+   /*    // 方法2
+        let obj = {};
+        let num = 0;
+       for(let i=0;i<str2.length;i++){
+        if(!obj[str2[i]]){
+            obj[str2[i]] = 1;
+        }else{
+            obj[str2[i]] += 1;
+        }   
+
+        if(obj[str2[i]] > num){
+            num = obj[str2[i]];
+            key = str2[i];
+        }
+       }
+        console.log(num,key); */
+
+</script>
+</body>
+</html>
