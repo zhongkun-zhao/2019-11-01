@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+        background: tomato;
+        text-align: center;
+        color: rgb(253, 252, 252);
+        position: absolute;
+        right: 0;
+        top: 100%;
+        cursor: pointer;/* 鼠标划入有小手 */
+        background-color: tomato;
+    }
+    body{
+        height: 2000px;
+        _overflow: hidden;
+        background:-webkit-linear-gradient(top,skyblue,red)
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box">回到顶部</div>
+<script>
+    /* 
+       滚轮事件：当有滚动条的时候该事件触发.
+           onscroll   
+           scrollHeight 被内容撑开的高度
+           scrollLeft/scrollTop 滚动条的距离 
+    */
+    
+    const {offsetTop} = box;// 获取回到顶部的那个距离顶部的距离。
+    //console.dir(box);//offsetTop: 625
+    onscroll = function(){
+        let {scrollTop}  = document.documentElement;
+        // console.dir(document.documentElement);
+        // console.log(scrollTop);
+        if(scrollTop>=offsetTop){
+            box.style.position = 'fixed';
+            box.style.top = '50%'
+        }else{
+            box.style.position = 'fixed';
+            box.style.top = '100%'
+        }      
+    };
+    box.onclick = function(){
+        let aa  = 100;
+    let time = setInterval(() => {
+        if (document.documentElement.scrollTop == 0){
+            clearInterval(time)
+        }
+        document.documentElement.scrollTop -= aa; 
+    }, 10);
+    
+    }
+</script>
+</body>
+</html>
