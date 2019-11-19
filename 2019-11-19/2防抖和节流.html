@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 3000px;">
+<script>
+    /* 
+    防抖 （停下来才出发）debounce                                      
+        当频率很高触发事假的时候，都不执行事件函数中的代码，只有停下来的时候才执行代码。
+
+        debounce(回调函数，延迟时间)
+
+    节流 （降低频率）throttling
+       每隔一定时间执行一次事件函数中的代码。比如隔10s
+        
+
+     */
+
+
+/* 防抖 */
+
+/* document.onscroll = debounce(fn,200);
+//事件函数的第一个参数为事假对象 Event为其中一个
+function fn(ev){//这里接收的是下面cb传的实参
+    console.log(ev);   
+}
+  function debounce(cb,time){// 这里接收的是 滑动时间的实参
+    let timer;
+   // console.log(this);Window   
+      return function(...ary){     
+          if(timer){
+              clearTimeout(timer)             
+          }
+          //console.log(this); document
+          timer = setTimeout(()=>{
+              //箭头函数的this是上下文的 就是document
+              cb.call(this,...ary)
+          },time);
+      }
+  } */
+  document.onscroll = throttling(fn,500);
+  function fn(ev){
+      console.log(ev);      
+  }
+  function throttling(cb,time){
+      let prevtime = 0;
+      //console.log(this);Window      
+      return function(...ary){
+          let nowtiem = +new Date;
+          if(nowtiem-prevtime > time){
+              cb.call(this,...ary)
+              console.log(this);  //      document    
+          }
+          prevtime = nowtiem;
+      }
+  }
+
+
+</script>
+</body>
+</html>

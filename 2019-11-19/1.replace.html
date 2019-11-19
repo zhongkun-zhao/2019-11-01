@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+        exec 的小秘密
+            如果是一个变量的正则，每次不断的去用正则调用exec，返回的结果
+            总是下次匹配结果,如果下次匹配不到，返回null
+
+            a ->  0
+            a ->  2
+            a ->  4
+            ....
+
+            lastIndex是可以拿到当前匹配项之后第一个字符的位置
+            
+    */
+
+
+//   let str = 'ababababab';
+//   let re = /a/g; // 不加g 就出不来下面的效果
+//   console.log(re.exec(str));//["a", index: 0, input: "ababababab", groups: undefined]
+//   console.log(re.exec(str));//["a", index: 2, input: "ababababab", groups: undefined]
+//   console.log(re.exec(str));//["a", index: 4, input: "ababababab", groups: undefined]
+  
+ let obj = {in:0,aa:'bb',cc:'wo'}
+let  {aa:a} = obj;
+ console.log(a);
+ console.log(aa);
+ console.log('我');
+
+/*
+    re:匹配的正则
+    str:整个字符串
+    cb:回调函数
+
+    返回的是一堆新的字符串
+
+    解决的是repalce，第一个参数是正则，第二个参数是函数
+*/
+
+
+</script>
+</body>
+</html>
