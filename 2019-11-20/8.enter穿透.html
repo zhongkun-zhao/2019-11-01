@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+    #box1{
+    width: 300px;
+    height: 300px;
+    background: salmon;
+    position: relative;
+    }
+    #box2{
+        width: 100px;
+        height: 100px;
+        background: slateblue;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+    }
+
+</style>
+</head>
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+
+<script>
+  //  onmouseenter   鼠标移入 (没有冒泡，解决了穿透问题)
+  //   onmouseleave 鼠标移出 (没有冒泡，解决了穿透问题)
+
+  box1.onmouseenter = function(){
+      console.log('大盒子入');    
+  }
+  box1.onmouseleave = function(){
+      console.log('大盒子出');    
+  }
+  box2.onmouseenter = function(){
+      console.log('xiao盒子入');    
+  }
+  box2.onmouseleave = function(){
+      console.log('xiao盒子出');    
+  }
+</script>
+</body>
+</html>

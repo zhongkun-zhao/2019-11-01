@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+<script>
+    let num = 0;
+    txt.oninput = function(){
+       let val = txt.value;
+        console.log(val);
+        num ++
+        console.log(num);//  这里可以获取
+    } 
+    console.log(num);//  当事件触发的时候代码已经运行完毕 所以这里获取的num就是事件触发之前的，触发事件只事件的代码，不会读取这里，要想获取只能在事件内部，或者在建立个事件 进行获取    
+    document.onclick = function(){
+        console.log(num);  // 这里也可以获取。  
+    }
+
+    
+
+
+</script>
+</body>
+</html>

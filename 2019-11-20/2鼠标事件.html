@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+ <style>
+ #box{
+    width:300px;
+    height:400px;
+    position: absolute;
+    left:310px;
+    top:50px;
+    opacity:0;
+ }
+ #box2{
+    width:300px;
+    height:400px;
+    position: absolute;
+    left:0;
+   
+    top:50px;
+    opacity:0;
+    
+ }
+ </style>
+</head>
+<body>
+  <img src="./16.jpg" alt="" id="box">
+  <img src="./15.jpg" alt="" id="box2">
+  
+    <button id="btn">出现</button>
+    <button id="btn2">消失</button>
+    <button id="btn3">点击</button>
+<script>
+// btn.onmousedown = function(){
+//     console.log('按下');   
+// }
+// btn2.onmouseup = function(){
+//     console.log('抬起'); 
+// }
+// btn3.onclick = function(){
+//     console.log('点击'); 
+// }
+
+function changan(cb,cb2){
+    let timer;
+    btn.onmousedown = function(){
+        let time = +new Date;
+        timer = setInterval(() => {
+            let now = new Date;
+            if(now - time > 500){ //加定时器为了让这个事件在执行0.5s后才回调，在执行回电函数中的代码
+                cb()// 回调函数，生命周期函数
+
+            }
+            //cb()
+        },20);
+    }
+    btn.onmouseup = function(){
+        clearInterval(timer);
+    }
+};
+
+let num = 0;
+changan(function(){
+   num += .005;
+    if(num >= 1){
+        box.style.opacity = 1;
+    }
+   box2.style.opacity = num;
+}) 
+
+btn2.onclick = function(){
+    box.style.opacity = 0;
+    box2.style.opacity = 0; 
+}
+
+box.onmousemove = function(ev){
+    // ev.pageX这个距离是基于页面的（加上了滚动条的距离）就是加上滚动了多少的距离。
+    this.style.left = ev.pageX -
+this.clientWidth/2 +'px';
+this.style.top = ev.pageY - this.clientHeight/2+ 'px';
+}
+box2.onmousemove = function(ev){
+    this.style.left = ev.pageX -
+this.clientWidth/2 +'px';
+this.style.top = ev.pageY - this.clientHeight/2+ 'px';
+}
+// window.onclick= function(ev){
+//     box2.style.left = ev.pageX -
+//     box2.clientWidth/2 +'px';
+//     box2.style.top = ev.pageY - box2.clientHeight/2+ 'px';
+
+// }
+
+</script>
+</body>
+</html>

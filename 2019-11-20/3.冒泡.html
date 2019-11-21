@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+div{
+    padding:100px;
+}
+#box{
+    background: red;;
+}
+#box1{
+    background:slateblue;
+}
+#box2{
+    background:teal;
+}
+#btn{
+    background:tomato;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2">
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+<script>
+    box.onclick = function(){
+        alert('box')
+    }
+    box1.onclick = function(){
+        alert('box1')
+    }
+    box2.onclick = function(){
+        alert('box2')
+    }
+    btn.onclick = function(ev){
+        alert('btn')
+        // 阻止冒泡
+         //ev.cancelBubble = true; 默认为flase  它不是标准，但是所有浏览器都兼容
+        // ev.stopPropagation();它是标准，但是低版本浏览器不兼容
+        console.log(ev)
+    }
+    window.onclick = function(){
+        alert('window')
+    }
+   
+</script>
+</body>
+</html>
