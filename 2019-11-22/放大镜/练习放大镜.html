@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>放大镜</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+div{
+    float: left;
+}
+#box{
+    width: 350px;
+    height: 450px;
+    border: 1px solid rgb(236, 53, 53);
+    position: relative;
+}
+#box2{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: rgb(250, 236, 114);
+    display: none;
+    cursor: move;
+}
+#box3{
+ width: 330px;
+ height: 500px;
+ border: 1px solid #000;
+ position: relative;
+ overflow: hidden;
+  display: none;
+}
+#img2{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+</style>
+</head>
+<body>
+<div id="box">
+    <img src="./1.jpg" alt="">
+    <div id="box2"></div>
+</div>
+<div id="box3">
+    <img id="img2" src="./18.jpg" alt="">
+</div>
+<script>
+    // 添加移入事件
+    box.onmouseover = function(){
+     box2.style.display = box3.style.display = 'block';
+    }
+    // 添加移出事件
+    box.onmouseout = function(){
+        box2.style.display = box3.style.display = 'none';
+    }
+    // 获取可是宽高 以后用
+    let boxw = box.clientWidth; 
+    let boxh = box.clientHeight;
+    // 添加鼠标移动事件
+    box.onmousemove = function(ev){
+        // 获取 光标 方块的移动距离
+        let l = ev.clientX -box2.clientWidth/2;
+        let t = ev.clientY - box2.clientHeight/2;
+            // 限制范围
+        if(l<0){
+            l = 0;
+        }else 
+        if(l>boxw - box2.clientWidth){
+            l=boxw - box2.clientWidth;
+        };
+        if(t<0){
+            t = 0;
+        }else 
+        if(t>boxh - box2.clientHeight){
+            t = boxh - box2.clientHeight;
+        };
+        box2.style.top = t + 'px';
+        box2.style.left = l + 'px';
+
+          //获取比例  0- 1 ; 最小距离就是在左边 鼠标的位置减去光标的一半，最大距离就是大盒子的宽减去 小盒子宽
+        let scalex = (ev.pageX - box2.clientWidth/2)/(boxw - box2.clientWidth);
+        let scaley = (ev.pageY - box2.clientHeight/2)/(boxh - box2.clientHeight)
+        // console.log(scaley);
+       // 最小0  最大 大盒子减小盒子
+        img2.style.left = scalex * (box3.clientWidth - img2.clientWidth) + 'px';
+        img2.style.top = scaley * (box3.clientHeight - img2.clientHeight) + 'px'
+        
+        
+    }
+  
+</script>
+
+</body>
+</html>

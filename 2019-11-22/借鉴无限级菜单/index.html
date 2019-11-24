@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+	<style>
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			margin: 0px;
+			width: 100%;
+			height: 100%;
+		}
+		.main {
+			width: 100%;
+			height: 100%;
+			background: url(./image/bg.png) no-repeat;
+			background-size: 100% 100%;
+			overflow: hidden;
+		}
+		.logo {
+			display: block;
+			width: 200px;
+			height: 55px;
+			margin: 20px auto;
+		}
+		.tree {
+			height: 100%;
+			overflow: auto;
+		}
+		ul {
+			list-style: none;
+			font-size: 22px;
+			color: #8c949c;
+			font-weight: bold;
+			width: 100%;
+			/* height:100%; */
+		}
+		ul li {
+			position: relative;
+			padding-left: 10px;
+			/* height:32px; */
+			overflow: hidden;
+		}
+		ul li div {
+			height: 98%;
+			/* width: 1px; */
+			border-left: 1px dotted #ccc;
+			/* position: absolute; */
+			/* left: 34px; */
+			/* top: 18px; */
+			/* margin-left :4px; */
+			line-height: 32px;
+		}
+		ul ul {
+			display: block;
+		}
+		ul li span {
+			display: block;
+			line-height: 32px;
+			padding-left: 15px;
+			background: url(./image/icon.png) no-repeat left 500px;
+			width: 20px;
+			height: 20px;
+			float: left;
+		}
+		ul li span.add {
+			background-position: 0px -32px;
+		}
+		ul li span.line {
+			background-position: 0px 11px;
+		}
+		.tree {
+			margin-left: 300px;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- ul > li > span div -->
+	<div class="main">
+		<a href="#" class="logo"></a>
+		<div class="tree">
+			<ul id="oUl"></ul>
+		</div>
+
+	</div>
+
+	<script>
+		/* 
+			菜单容器:<ul id="oUl"></ul>
+			一级菜单结构:
+				<li>
+					<span class='add'></span>
+					<div>第一级菜单</div>
+				</li>
+			子级菜单结构:
+				<ul>
+					<li>
+						<span class="line"></span>
+						<div>第二级菜单</div>
+					</li>
+				</ul>
+			
+			循环数据, 
+			当属性名是: title-没有子菜单 -> 取出数据渲染到页面
+			当属性名是: child - 说明下面有子菜单(渲染) -> 需要继续往下找(边渲染) - 直到没有child为止 -> 
+		
+		*/
+		fetch('./data.json')
+			.then(d => d.json())
+			.then((data => {
+				let newDate = data.concat();
+				let tree = document.querySelector('.tree');
+				let oUl = document.querySelector('#oUl');
+				// let ulb = document.createElement('ul');
+				// let uls = document.createElement('ul');
+				// let li = document.createElement('li');
+				// let span = document.createElement('span');
+				// let div = document.createElement('div');
+				// tree.append(ulb);
+				// ulb.setAttribute('id','oUl');
+				function render(newDate) {
+					newDate.forEach(eachDate => {
+						//eachDate 每个一级菜单
+						for (let attr in eachDate) { 
+							if (attr === 'title') {
+								// console.log(eachDate[attr])
+								let li = document.createElement('li');
+								let span = document.createElement('span');
+								span.className = 'add'
+								let div = document.createElement('div');
+								div.innerText = eachDate[attr];
+								oUl.appendChild(li);
+								li.appendChild(span);
+								li.appendChild(div);
+							}else if(attr === 'child'){
+								// render(eachDate[attr]);
+								eachDate[attr].forEach(eachDate=>{
+									for(let attr in eachDate){
+										if(attr === 'title'){
+											let ul = document.createElement('ul');
+											let li = document.createElement('li');
+											let span = document.createElement('span');
+											span.className = 'line'
+											let div = document.createElement('div');
+											div.innerText = eachDate[attr];
+											console.log(eachDate[attr]);
+											ul.appendChild(li);
+											li.appendChild(span);
+											li.appendChild(div);
+											let add = document.querySelector('.add');
+											//插入的位置没有办法确定(递归)
+										}
+									}
+								});
+							}
+						}
+					});
+				}
+				render(newDate);
+			}));
+	</script>
+</body>
+<script>
+</script>
+
+</html> 

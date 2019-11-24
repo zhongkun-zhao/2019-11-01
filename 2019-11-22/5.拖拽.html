@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <style>
+    #box{
+        width: 300px;
+        height: 500px;
+        background:url(18.jpg) ;
+        background-size: cover;
+        position: absolute;
+        
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+   
+<script>
+/* 
+三大事件组成：
+onmousedown
+onmousemove
+onmouseup
+ */
+
+
+ box.onmousedown = function(ev){
+     // 获取点击图片的那个点的位置到这个图片左边和上边的距离。
+     let disx = ev.pageX - box.offsetLeft;
+     let disy = ev.pageY - box.offsetTop;
+     document.onmousemove = function(ev){
+         // 需要在鼠标点下事件里 在加移动事件
+         // 这个移动距离 要算图片 左边 和上边的位置来移动
+         box.style.left = ev.pageX - disx +'px';
+         box.style.top = ev.pageY - disy +'px'
+     }
+     // 鼠标抬起的时候 需要关移动事件。
+     document.onmouseup = function(){
+     document.onmousemove = null;
+     }
+ }
+
+
+ //  下边为老师代码
+// box.onmousedown = function(ev){
+      
+//       let disX = ev.pageX - box.offsetLeft; //按下的作用
+//       let disY = ev.pageY - box.offsetTop; //点到盒子边的距离
+//   //    console.log(disX);
+     
+//       document.onmousemove = function(ev){
+//           // console.log('move')
+//           //移动的坐标
+//           box.style.left = ev.pageX - disX + 'px';
+//           console.log(ev.pageX - disX);
+          
+//           box.style.top = ev.pageY - disY + 'px';
+//           // console.log(box.offsetLeft)
+
+//       }
+//       document.onmouseup = function(){
+//           // console.log('up');
+//           document.onmousemove = null;
+//       }
+//   }
+</script>
+</body>
+</html>

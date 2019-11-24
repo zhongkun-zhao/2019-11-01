@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>飞机大战</title>
+<style>
+    body{
+        background: url(timg.jpg);
+      
+    }
+#box{
+    width:100px;
+    height:100px;
+    position: absolute;
+    top:500px;
+    left:500px;
+    /* background: orangered; */
+    background: url(14.jpg);
+    background-size: cover;
+
+}
+
+.box2{
+    width:30px;
+    height:30px;
+    /* background:seagreen;
+    border-radius: 50%; */
+    background: url(19.jpg);
+    background-size: cover;
+    position: absolute;
+    top:0px;
+    left:36px;
+    transition: 1s;
+}
+</style>
+</head>
+<body>
+    <div id="box">
+       
+        <div id="box2"></div>
+    </div>
+<script>
+    /*
+        作业:
+            1.做到切换按键的时候不卡
+            2.2个按键按下时斜着跑
+    */
+     let timer;
+     let obj = {};
+     // 键 在换键的时候回系统会默认出现间隔，想要消除这种间隔 就设一个 定时器，让事件间隔等于 一直按的时候的间隔。
+    document.onkeydown = function(ev){
+         obj[ev.keyCode] = true;
+        if(!timer){
+            timer = setInterval(fn,16.7);
+        }
+
+    }
+       let fn =()=>{
+           // 有键值 传过来才为true；
+           if(obj['38']){
+            box.style.top = box.offsetTop - 25 + 'px';
+           }
+           if(obj['40']){
+            box.style.top = box.offsetTop + 25 + 'px';
+           }
+           if(obj['37']){
+            box.style.left = box.offsetLeft - 25 + 'px';
+           }
+           if(obj['39']){
+            box.style.left = box.offsetLeft + 25 + 'px'; 
+           }
+           if(obj['32']){
+            let div = document.createElement('div');
+                div.className = 'box2';
+                box.append(div);
+                setTimeout(() => {
+                    div.style.top = -1000 + 'px';
+                 });
+            }
+       }
+         
+        document.onkeyup = function(ev){
+            obj[ev.keyCode] = false;
+            // 如果全是flasc  就是抬起状态 然后关定时器。
+            if(Object.values(obj).every(item=>!item)){
+            clearInterval(timer);
+            timer = null;
+        }
+        }
+     
+</script>
+</body>
+</html>

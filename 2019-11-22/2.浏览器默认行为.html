@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /* 
+    浏览器默认行为：某些行为不是人为的，而是浏览器默认做的。
+    DOM0得方式：
+      要阻止默认行为就要知道是什么事件触发这种行为。
+       
+      1 全部阻止 ：return false；
+      2 把事件的 ev.returnValue 设置为false  （灵活，想阻止那个就设置那个） （事件绑定的时候使用）
+        ev.returnValue = false;
+      3 ev.preventDefault (事件绑定的时候使用)
+       oncontextmenu  鼠标右键 
+     */
+     document.onkeydown = function(ev){
+         
+         if(ev.keyCode === 32){           
+            // ev.returnValue = false  //?????不管用
+            // return false             
+            console.log(1);
+         }    
+     }
+
+     document.oncontextmenu = function(ev){
+      // return false
+      //  ev.returnValue = false
+         console.log(2);   
+     }
+</script>
+</body>
+</html>
