@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    .active{
+        background: yellow;
+    }
+    #box div,#box2 div{
+        display: none;
+    }
+    #box div.show,#box2 div.show{
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button class="active">周冬雨</button>
+        <button>小姐姐</button>
+        <button>大姐姐</button>
+         <div><img src="./10.jpg" alt=""></div>
+         <div><img src="./11.jpg" alt=""></div>
+         <div><img src="./12.jpg" alt=""></div>
+    </div>
+<script src="../2019-11-25/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+ const $box = $('#box');
+ const $btns = $box.find('button');
+ const $divs = $box.find('div');
+//$(this).index()  基于父级，这里父级的元素下 按钮对应的索引 和btn一样
+ $btns.click(function(){
+     //把当前的class添加好，把它的兄弟的class清除
+     $(this).addClass('active').siblings('button').removeClass('active');
+     //把当前按钮对应的class添加好，把它的兄弟的class清除，
+     $divs.eq($(this).index('button')).addClass('show').siblings('div').removeClass('show');
+ }) 
+
+//  $btns.click(function(){
+//      $btns.removeClass('active');
+//      $divs.removeClass('show')
+
+//      $(this).addClass('active');
+//      $divs.eq($(this).index()).addClass('show');
+     
+//  })
+</script>
+</body>
+</html>

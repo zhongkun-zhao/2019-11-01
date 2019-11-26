@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="pb1">pb1
+        <div class="pb2">pb2
+            <div id="box1">box1</div>
+        </div>
+    </div>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <script src="../2019-11-25/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    /* 
+     插入到莫个元素前面  （插入的元素和当前元素是并列关系）
+     $('#box').before($('<div>2</div>'));
+     
+     关系 : 父子  兄弟
+       parentNode -> parent();
+       previousElementSibling -> prev()
+       nextElementSibling -> next()
+       parents() ->某个元素的所有祖先级节点，括号中可以精确匹配
+       $('div').siblings() 当前元素的上兄弟节点和下兄弟节点。
+
+       index(),找索引 ，顺序默认基于父级，也可以精确匹配
+       index('button') ,找button的index
+    
+    
+    */
+
+        $('#box1').before($('<div>box2</div>'))
+        
+        console.log($('#box1').parents());//k.fn.init(4) [div.pb2, div.pb1, body, html, prevObject: k.fn.init(1)]
+        console.log($('#box1').parents('.pb1'));//k.fn.init [div.pb1, prevObject: k.fn.init(1)]    （精确查找）
+        
+        console.log( $("button").siblings());//  这个就很牛逼了  只要是并列的都能找到  就算script 都不放过。
+       
+        $('button').click(function(){
+            console.log($(this).index())  //认基于父级      
+            console.log($(this).index('button'))// 这个就没有基于父级
+        })
+        
+    </script>
+    
+</body>
+</html>

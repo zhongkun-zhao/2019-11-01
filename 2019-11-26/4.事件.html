@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件</title>
+    <style>
+        #box2{
+            width: 100px;
+            height: 100px;
+            background: rosybrown;
+        }
+    
+    </style>
+</head>
+
+<body>
+    <div id="box">
+            <button>按钮</button>
+    </div>
+      
+<div id="box2">
+        <button>按钮</button>
+        <ul>
+            <li>哈哈</li>
+            <li>啊</li>
+            <li>我打</li>
+            <li>wowo</li>
+        </ul>
+</div>
+<ul id="ul2"></ul>
+<script src="../2019-11-25/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+/* 
+  click
+  mouseover
+  mouseout
+
+  事件三大部分：
+    1.事件流。
+    2.有哪些事件，他们是干什么的。
+    3.事件对象。
+
+    hover:
+        onmouseenter
+        onouseleave
+
+
+    jQ中的所有事件，都是on来二次封装,JQ中的事件全部都是事件绑定
+
+    jQ的事件对象都是二次封装的，如果要拿到真正的原生js事件对象
+            ev.originalEvent（原生事件对象）
+
+    jQ中阻止冒泡和默认行为，直接return false即可;
+
+
+*/
+
+/* $('#box').hover(function(){
+    console.log('移入')
+},function(){
+    console.log('移出');   
+}) */
+
+// 事件监听 delegate() 方法为指定的元素（属于被选元素的子元素）添加一个或多个事件处理程序，并规定当这些事件发生时运行的函数。
+
+//使用 delegate() 方法的事件处理程序适用于当前或未来的元素（比如由脚本创建的新元素）
+$('#box').delegate('button','click',function(){
+    $('#box2').slideToggle();
+})
+
+
+// $('#box2').on('mouseenter',function(){
+//     console.log('移入');   
+// })
+// $('#box2').on('click','li',function(){
+//     console.log('点击的是'+this.innerText);  
+// })
+
+ /*
+问题：
+    触发一次hover，就绑定一次click，触发的越多，绑定的就越多，当触发一次click就会执行多次的click事件
+
+解决:
+    off()
+    绑一次解绑一次，保持始终一次click
+    */
+
+
+$('#box2').mouseover(function(){
+    $(this).css({background:'red'});
+    $('button').off().click(function(){
+       console.log('请求一次');        
+    })
+});
+$('#box2').mouseout(function(){
+    $(this).css({background:'skyblue'});
+})
+
+
+let ary = ['尹德志','你真胖','董尚','李磊'];
+
+ary.forEach((ele,i)=>{
+    let $lis = $('<li>'+(i+8)+'</li>');
+    $('#ul2').append($lis);
+    $lis.on('click',{data:ele},function(ev){
+        console.log('我的是'+ev.data.data);
+        console.log(ev);//data: {data: "董尚"}  ev 下有个adta属性     
+    })
+})
+
+</script>
+</body>
+</html>

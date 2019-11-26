@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #box{
+    width:100px;
+    height:100px;
+    background: red;
+    position: absolute;
+    top:50px;
+    left:0;
+  /* transition: .5s; */
+}
+    </style>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <div id="box"></div>
+<script src="../2019-11-25/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+ /* 
+   show  显示
+   hied  隐藏，有动画效果。
+   toggle  如果显示就隐藏 如果隐藏就显示  有动画。
+   slideToggle   改变高度
+   fadeToggle 渐隐贱现
+
+   
+    在做jq动画的时候，记得使用stop(),把前面的动画清掉
+ */
+ $('#btn').click(function(){
+  //$('#box').hide(1000)  //动画效果隐藏持续1s
+  // $('#box').toggle(500);//改变宽高、透明度 重复
+ // $('#box').slideToggle()//改变宽高、透明度 重复
+  //$('#box').fadeToggle(500); //渐隐渐现
+ })
+
+
+ // mei qiao
+  // $(document).click(function(){
+    //     // $('#box').css({
+    //     //     left:400
+    //     // })
+
+    //     // $('#box').delay(1000).animate({
+    //     //     left:400
+    //     // },3000);
+
+    //     // setInterval(() => {
+    //     //     $('#box').animate({
+    //     //         left:$('#box').offset().left + 100
+    //     //     },500);
+    //     // },1000);
+    // });
+</script>
+</body>
+</html>
