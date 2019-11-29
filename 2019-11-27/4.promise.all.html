@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /* 
+    race 在数组中只要有一个异步成功就返回这次成功的结果，all是数组中的异步操作都要成功才返回成功结果
+   
+
+    
+    then的第二个参数为失败函数，也可以不用写，直接在then函数之后.catch()
+    就可以了
+
+    throw 抛出异常，说明代码错误，会进catch
+
+    .then 或 .catch 返回的值不能是 promise 本身，否则会造成死循环
+    */
+    // p.then((d)=>{
+    //     console.log(d);
+    // }).catch((error)=>{
+    //     console.log(error)
+    // });
+
+/* 
+   //   throw 抛出异常，说明代码错误，会进catch，如果是return new Error('error!!!')不会进catch
+    Promise.resolve()
+    .then(() => {
+        // throw new Error('error!!!')
+        return new Error('error!!!')
+    })
+    .then((res) => {
+        console.log('then: ', res)
+        // return []
+    })
+    .catch((err) => {
+        console.log('catch: ', err)
+    })
+    .then((res)=>{
+        console.log(res);// 33行的代码没有返回值，所以res是undefined
+    }); */
+
+
+
+    //.then 或 .catch 返回的值不能是 promise 本身，否则会造成死循环
+    // const promise = Promise.resolve()
+    // .then(() => {
+    //     return promise
+    // })
+    // promise.catch(console.error)
+
+   /*  // 穿透了
+    Promise.resolve(1)
+    .then(2)
+    .then(Promise.resolve(3))
+    .then(function(a){
+        console.log(a);       
+    }) 
+ */
+
+
+    /* Promise.resolve()
+    .then(function success (res) {
+      return  new Error('error')
+    }, function fail1 (e) {
+        console.error('fail1: ', e)
+    })
+    .catch(function fail2 (e) {
+        console.error('fail2: ', e)
+    })
+    .then(function fail3(e){
+        console.error('fail3: ', e)
+    })  */
+
+</script>
+</body>
+</html>

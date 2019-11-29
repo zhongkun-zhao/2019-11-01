@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+        then里面才是微任务
+        then不是函数就穿透,直到then是函数为止
+    */
+    const promise = new Promise((resolve, reject) => {
+        console.log(1); //主线程
+        resolve();
+        console.log(2);//主线程
+    })
+    promise.then(() => {
+        console.log(3);//微任务
+    })
+    console.log(4);   //主线程 
+
+
+    // const promise = new Promise((resolve, reject) => {
+    //     resolve('success1');
+    //     reject('error');
+    //     resolve('success2');
+    // });
+    // promise.then((res) => {
+    //     console.log('then:', res);
+    // }).catch((err) => {
+    //     console.log('catch:', err);
+    // })
+
+    // //then不是函数就穿透,直到then是函数为止
+    // console.log(Promise.resolve(3))
+    // Promise.resolve(1)
+    // .then(2)
+    // .then(_=>6)
+    // .then(console.log)
+
+
+    /*
+        红灯3秒亮一次，绿灯1秒亮一次，黄灯2秒亮一次；
+        如何让三个灯不断交替重复亮灯？
+        （用Promise实现）三个亮灯函数已经存在：
+    */
+    
+    /* function fn(){
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve();
+            }, 3000);
+        })
+
+        p.then(()=>{
+            red();
+            return new Promise(function(resolve){
+                setTimeout(() => {
+                    resolve(); 
+                },1000);
+            });
+        }).then(()=>{
+            green();
+            return new Promise(function(resolve){
+                setTimeout(() => {
+                    resolve(); 
+                },2000);
+            });
+        }).then(()=>{
+            yellow();
+        })
+    } */
+    
+    // fn();
+    
+    // setInterval(fn, 6000);
+
+
+  /*   function red() {
+        console.log('red');
+    }
+    function green() {
+        console.log('green');
+    }
+    function yellow() {
+        console.log('yellow');
+    }
+
+ */
+/**********************************************************/
+    /*
+        timeout(2000).then(()=>{成功后的结果})
+
+
+        如果是用promise.all，三个请求都要请求完毕（不能保证谁先执行谁后执行完），才做别的事情
+    */
+    // const timeout = ms => new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve();
+    //     }, ms);
+    // });
+
+    // const ajax1 = () => timeout(2000).then(() => {
+    //     console.log('1');
+    //     return 1;
+    // });
+    // const ajax2 = () => timeout(1000).then(() => {
+    //     console.log('2');
+    //     return 2;
+    // });
+    // const ajax3 = () => timeout(2000).then(() => {
+    //     console.log('3');
+    //     return 3;
+    // });
+    // const mergePromise = ajaxArray => {
+    //     let r = Promise.resolve(); //创建一个成功的promise对象
+    //     // console.log(r);
+    //     let ary = [];
+    //     //每次循环的时候都把执行函数放到r.then里去执行，执行完的返回结果在ary每一项
+    //     ajaxArray.forEach(item=>{
+    //         r = r.then(item).then((d)=>{
+    //             ary.push(d);
+    //             return ary; //[1,2,3]
+    //         });
+    //     });
+    //     return r;
+    // };
+
+    // mergePromise([ajax1, ajax2, ajax3]).then((data) => {
+    //     console.log('done');
+    //     console.log(data); // data 为 [1, 2, 3]
+    // });
+
+
+
+
+
+</script>
+</body>
+</html>
