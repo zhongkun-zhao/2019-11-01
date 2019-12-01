@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>画框碰撞</title>
+<style>
+#box{
+    background: url(./9.jpg);
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+#box2{
+  width: 100px;
+  height: 100px;
+  background:red;
+  position: absolute;
+  top:300px;
+  left: 300px;
+}
+#box3{
+  width: 100px;
+  height: 100px;
+  background:red    ;
+  position: absolute;
+  top:300px;
+  left: 500px;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box2" class="b"></div>
+    <div id="box3" class="b"></div>
+<script src="./bong.js"></script>
+<script>
+let b = document.querySelectorAll('.b')
+console.log(b)
+class Drag{
+    constructor(id){
+        
+        this.box = document.getElementById(id)
+        // console.log(this.box)
+    }
+    init(){
+        document.addEventListener('mousedown',this.d = this.down.bind(this));
+    }
+    down(ev){
+        this.disx = ev.pageX;
+        this.disy = ev.pageY;
+        
+        this.box.style.display = 'block';
+
+        this.box.style.top = this.disy +'px';
+        this.box.style.left = this.disx +'px';
+        // console.log(this.disy +'px',this.disx +'px')
+
+        document.addEventListener('mousemove',this.m = this.move.bind(this)); 
+        document.addEventListener('mouseup',this.u = this.up.bind(this));
+        ev.preventDefault();
+    }
+
+    move(ev){
+        this.box.style.top = Math.min(ev.pageY,this.disy) +'px';
+        this.box.style.left = Math.min(ev.pageX,this.disx) + 'px';
+
+        this.box.style.width = Math.abs(ev.pageX - this.disx) + 'px';
+        this.box.style.height = Math.abs(ev.pageY - this.disy) + 'px'
+        console.log(b);
+       b.forEach(ele=>{
+    
+        if((bong(box,ele))){
+            ele.style.background = 'pink'
+        }else{
+            ele.style.background = 'red'
+        }
+       })
+    }
+
+    up(){
+        this.box.style.height = this.box.style.width = 0;
+        this.box.style.display = 'none';
+        document.removeEventListener('mousemove',this.m);
+         document.removeEventListener('mouseup',this.u);
+    }
+  
+   
+}
+let d = new Drag('box')
+d.init()
+</script>
+</body>
+</html>

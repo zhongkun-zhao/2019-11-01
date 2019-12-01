@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新建文件夹</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box img{
+        width: 100px;
+        height: 100px;
+    }
+    .folder{
+        float:left;
+        margin: 10px;
+        padding:10px;
+        border: 1px solid #ccc;
+        width: 100px;
+        text-align: center;
+
+    }
+    .folder input{
+        width: 95px;
+        margin: 0 auto;
+        display: inline-block;
+        text-align: center;
+    }
+    .folder p{
+        width: 95px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    #btn {
+        margin-left: 10px;
+        margin-top: 10px;
+     }
+
+    </style>
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <div id="box">
+        <!-- <div class="folder">
+          <img src="./7.jpg" alt="">
+          <input type="text"/>
+         <p>新建文件</p> -->
+        <!-- </div> -->
+    </div>
+    <script src="../2019-11-25/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+   /* 
+      onblur  失焦事件
+      select  全选 + 聚焦  （表单的方法）
+   
+   */
+
+    let ary = [
+      {
+          title:'新建文件夹',
+          id:0
+      },
+      {   title:'新建文件夹(1)',
+          id:0}
+    ];
+
+    function render(arr){
+        $('#box').html('');
+        $.each(arr,(i,item)=>{
+            // 创建每个div
+            let $flofer = $(`
+              <div class="folder">
+              <img src="./7.jpg" alt="">
+              <input type="text"/>
+              <p>${item.title}</p>           
+            `);
+            // 让创建的额模板字符串的input隐藏，这里不能让#box 下的input隐藏。
+            $flofer.find('input').hide();
+            // 创建完了 添加到box中
+            $('#box').append($flofer)
+        })
+    }
+    render(ary)
+    /* 
+    点击创建文件夹
+    1 xian在box中创建一个folder元素，
+    2 当folder中的input 失焦之后，把失焦的数据渲染到ary中
+    3 再通过ary渲染页面
+
+    */
+   $('#btn').click(function(){
+     let $folder = $(`
+        <div class="folder">
+        <img src="./7.jpg" alt="">
+        <input type="text" placeholder="请设置文件名" value="新建文件夹"/>
+        </div>
+        ` 
+     );
+     $('#box').append($folder);
+     let $inp = $folder.find('input')
+    //  console.log($inp[0])
+     $inp.select();// 让input框为选中，聚焦状态。
+    // console.log($inp)
+     $inp.blur(function(){
+        let val = $inp.val();
+        // console.log(val);
+        let bool = ary.map(item=>item.title).includes(val);
+        let nval = '';
+        let num = 1;
+        nval = val;
+        while(bool){
+            let s = val.replace(/\(\d\)$/,'')+'('+ num++ +')';
+            bool = ary.map(item=>item.title).includes(s);
+            nval = s
+        }
+        
+        ary.push({
+            id:+new Date,
+            title:nval
+        });
+       //  通过arypush完的新数据渲染页面，页面中的数据才会是ary 这样才能在失焦的事件下进行重名对比，如果不用新数据渲染，页面中只会保留开始渲染的数据 以及添加的数据。
+       // 此题 页面一开始渲染是用数据渲染，后来点击事件进行添加，截止到这一步 虽然页面中有一组新的数据，但是ary中还没有。
+       // 失焦事件之后我们就把页面中新的数据push到ary中，在用新ary中的数据进行页面渲染，保证以后对比。
+        render(ary);  
+        console.log(ary)  
+
+     });
+    
+   });
+   
+</script> 
+</body>
+</html>

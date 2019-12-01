@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>画框</title>
+<style>
+#box{
+    /* width: 100px;
+    height: 100px; */
+    background: url(./9.jpg);
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+</style>
+
+</head>
+<body>
+    <div id="box"></div>
+<script>
+  class Drag {
+    constructor(id){
+        this.box = document.getElementById(id)
+    }
+    init(){
+        //this.down.bind(this) 修改this指向全部指向实例 用bind 惰性函数，如果用call 这里会返回一个值，那this.d就不是一个函数，会报错
+        document.addEventListener('mousedown',this.d = this.down.bind(this));
+    }
+    down(ev){
+        let {left,top} = this.box.getBoundingClientRect();
+        // console.log(left,top)
+        // 获取到鼠标按下的坐标
+        this.disx = ev.pageX
+        this.disy = ev.pageY
+        // console.log(this.disx,this.disy)
+        this.box.style.display = 'block'
+
+        //让拿下的时候box的topleft等于按下的
+        this.box.style.left = this.disx +'px';
+        this.box.style.top = this.disy +'px';
+        // console.log(this.box.style.left,this.box.style.top)
+
+        document.addEventListener('mousemove',this.m = this.move.bind(this));
+        document.addEventListener('mouseup',this.u = this.up.bind(this));
+    }
+
+    move(ev){
+        /* 
+        往右下移动 left，top不变，往左上移动left，top 值改变。
+         move - down 大于0 往右下。
+        按下的值比移动的值小，就是往右下移动，那么top left 就是按下的值，
+        移动的比按下的小，就是往左上，那么top left 就是移动的
+        */
+        
+        this.box.style.top = Math.min(ev.pageY,this.disy) + 'px'
+        this.box.style.left = Math.min(ev.pageX,this.disx) + 'px'
+        console.log(ev.pageY,this.disy)
+
+        //移动的距离 - 按下的距离 = 移动了多少距离
+        this.box.style.width = Math.abs(ev.pageX - this.disx) + 'px'
+        this.box.style.height = Math.abs(ev.pageY - this.disy) + 'px'
+
+    }
+
+    up(){
+        // this.box.style.height = this.box.style.width = 0;
+        this.box.style.display = 'none'
+        document.removeEventListener('mousemove',this.m)
+        document.removeEventListener('mouseup',this.u)
+
+    }
+  }
+  let d = new Drag('box')
+  d.init()
+
+</script>
+</body>
+</html>

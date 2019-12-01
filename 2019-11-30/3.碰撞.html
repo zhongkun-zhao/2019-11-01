@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>碰撞</title>
+    <style>
+    #box{
+       width: 100px;
+       height: 100px;
+       background:url(./7.jpg);
+       background-size: cover;
+       position: absolute;
+       left: 0;
+       top:0;
+    }
+    #box2{
+        width: 100px;
+        height: 100px;
+        background: skyblue;
+        position: absolute;
+        left: 300px;
+        top: 300px;
+    }
+    
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div id="box2"></div>
+<script src="./bong.js"></script>
+
+<script>
+/*
+    DOM0 on
+        null
+
+    DOM2 addEventListener
+
+        removeEvenetListener('事件',要解除的函数,布尔值)
+            注意：
+                *** 解除绑定必须是一个有名函数（要和绑定的函数对应）
+
+*/  
+ 
+ // 碰撞事件
+ /*  box.addEventListener('mousedown',function(ev)
+  {
+    let {left,top:t} = this.getBoundingClientRect();
+    // console.log(left,t)
+    let disx = ev.pageX - left;
+    let disy = ev.pageY - t;
+    // console.log(disx,disy)
+    function m(ev){
+        let l = ev.pageX - disx;
+        let t = ev.pageY - disy;
+        let r = l + box.offsetWidth
+        let b = t+ box.offsetHeight;
+
+        let {left:l2,top:t2,bottom:b2,right:r2} = box2.getBoundingClientRect();
+
+        if(r<l2 || b<t2 || l>r2 ||t>b2){
+            console.log('mei')
+            box2.style.background = 'skyblue';
+        }else{
+            box2.style.background = 'pink'
+        }
+        box.style.cssText = `left:${l}px;top:${t}px`
+    } 
+    function up(ev){
+        document.removeEventListener('mousemove',m);
+        document.removeEventListener('mouseup',up)
+    }
+
+    document.addEventListener('mousemove',m);
+    document.addEventListener('mouseup',up);
+
+    ev.preventDefault();// 阻止默认事件
+  })
+ */
+
+ box.addEventListener('mousedown',function(ev){
+     let {left,top:t} = this.getBoundingClientRect();
+     let disx = ev.pageX - left;
+     let disy = ev.pageY -t;
+    //  console.log(disx,disy)
+    document.addEventListener('mousemove',m);
+     function m(ev){
+       if(bong(box,box2)){
+           console.log('1')
+           box2.style.background = 'pink'
+       }else{
+           box2.style.background = 'skyblue'
+       }
+      box.style.cssText = `left:${ev.pageX - disx}px;top:${ev.pageY - disy}px`
+      document.addEventListener('mouseup',up);
+      function up(ev){
+          document.removeEventListener('mousemove',m)
+          document.removeEventListener('mouseup',up)
+      }
+     }
+     ev.preventDefault();
+ })
+
+</script>
+
+</body>
+</html>
