@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+  @font-face {  
+      /*  定义一个字体为a */
+        font-family: a;
+        src: url('./字体/方正粗黑宋简体.ttf');     
+    }  
+    p{
+        /* 这里引用那个字体 下面p的字体就变了
+         */
+        font-family: 'a'；  
+    }
+    #box{
+    /* 在改变组件的样式时可以使用!important  权重大于行内*/
+    width:150px !important;
+    height: 100px;
+    background: red;
+    }
+    input[type="button"]{
+        /* 有两个input 选择 type="button"的*/
+        background: royalblue;
+    }
+
+    div[class|="a"]{
+        /* 补加竖杆只选择是a的 加竖杆就选class要么是a要么是a-开头的*/
+    background:red;
+    }
+
+    /* 标签名要是同一类型(只有p标签的第二个元素被选中) */
+    #box2 p:nth-of-type(2){
+        color:rgb(255, 30, 0);
+    }
+
+    /*可以不是同一类型的   倒数第2个元素(不管是什么元素的倒数第二个)*/
+    #box2 :nth-last-child(2){
+        color:rgb(224, 17, 224)
+    }
+
+
+    #box1{
+         width: 200px;
+         height: 200px;
+         /* border: 10px solid transparent; */
+         background: url('2.jpg');
+         background-size: 200px 200px;
+         _background-size: cover;
+         /* 高斯模糊 */
+         filter:blur(5px);
+         transition:0.5s;       
+    }
+    #box1:hover{
+        filter:blur(0);
+    }
+</style>
+</head>
+<body>
+    <p>我的字体</p>
+    <div id="box" class="box" style="width:100px"></div>
+
+    <input type="text">
+    <input type="button">
+
+    <div class="aaa">1</div>
+    <div class="a-bc">2</div>
+    <div class="a">3</div>
+
+    <div id="box2">
+        <p>1111</p>
+        <span>1212</span>
+        <span>1313</span>
+        <p>2222</p>
+    </div>
+    
+    <div id="box1"></div>
+<script>
+
+</script>
+</body>
+</html>

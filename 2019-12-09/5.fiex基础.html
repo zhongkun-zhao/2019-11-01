@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>flex</title>
+<style>
+*{
+    margin:0;
+    padding:0
+}
+#box1{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border:1px solid red;
+    /* 默认方向是左对齐 */
+    /* justify-content:flex-start; */
+    /* 右对齐 */
+    /* justify-content: flex-end; */
+    /* 居中对齐 */
+    /* justify-content:center;*/
+    /* 第一个和最后一个分别顶着父级的边，中间平均分 */
+    /* justify-content: space-between; */
+    /* 平均分配剩余的空间 */
+    /* justify-content:space-around; */
+    /* 间距平均分配 */
+    /* justify-content:space-evenly; */
+
+}
+#box1 span{
+    /* flex或者float 行内元素写宽高就起作用 */
+    width: 100px;
+    height: 100px;
+    background:skyblue;
+    border: 1px solid #000;
+}
+
+#box2{
+    width: 400px;
+    height: 500px;
+    display: flex;
+    border:1px solid red;
+    /*   强制换行:(注意的是flex布局默认是不换行的为默认**一行**显示) */
+    _flex-wrap:wrap;
+    /* 两行颠倒 */
+    flex-wrap:wrap-reverse;
+}
+#box2 span{
+    width: 100px;
+    height: 100px;
+    background:skyblue;
+    border: 1px solid #000;
+}
+#box3{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border:1px solid red;
+    /* 设置主轴为X轴并翻转  */
+    /*  flex-direction: row-reverse; */
+    /* 设置主轴为y轴并翻转 */
+    flex-direction:column-reverse;
+}
+#box3 span{
+    width: 100px;
+    height: 100px;
+    background:skyblue;
+    border: 1px solid #000;
+}
+#box4{
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    border:1px solid red;
+    /* 定义在侧周上的对齐方式默认左上对齐 */
+    /* align-items:flex-start;*/
+    /* 底部对齐 */
+    /* align-items:flex-end; */
+    /* 拉扯:没有设置高度的会被拉扯 */
+    align-items:stretch
+
+
+}
+#box4 span{
+    width: 100px;
+    /* height: 100px; */
+    background:skyblue;
+    border: 1px solid #000;
+}
+#box5{
+    width: 800px;
+    height: 500px;
+    display: flex;
+    border:1px solid red;
+    flex-wrap: wrap;
+    /* 多轴的对齐方式 默认坐上 */
+    /* align-content:flex-start； */
+    /* 底部对齐 */
+     /* align-content:flex-end； */
+
+
+
+    
+}
+#box5 span{
+    width: 200px;
+    height: 100px;
+    background:skyblue;
+    border: 1px solid #000;
+}
+
+
+</style>
+</head>
+<body>
+    <div id="box5">
+       <span>1</span>
+       <span>2</span>
+       <span>3</span>
+       <span>4</span>
+       <span>5</span>
+    </div>
+    
+</body>
+</html>
