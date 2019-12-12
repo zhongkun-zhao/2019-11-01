@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>background-size</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#box{
+    width: 400px;
+    height: 400px;
+    border: 1px solid red;
+    background: url('./12.jpg') no-repeat;
+    /* 如果写一个就按照宽走，高度自适应 溢出会隐藏 */
+    /* background-size: 200px auto; */
+    /*一个是设置宽一个是设置高 图片会被拉伸*/
+    background-size: 400px  400px ;  
+    /*填满整个区域  短边要铺满 长边会隐藏*/
+    /* background-size:cover; */
+    /*任意填满一边就够了*/
+    background-size:contain;
+
+}
+ul{
+    display: flex;
+}
+li{
+    width: 40px;
+    height: 40px;
+    background:url('./nav.png') 0 0 no-repeat;
+    background-size: 40px ;
+}
+li:nth-child(1){
+    background-position: 0 0;
+}
+li:nth-child(2){
+    background-position: 0 -40px;
+}
+li:nth-child(3){
+    background-position: 0 -80px;
+}
+li:nth-child(4){
+    background-position: 0 -120px;
+}
+li:nth-child(5){
+    background-position: 0 -160px;
+}
+</style>
+</head>
+<body>
+    <div id="box"></div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>           
+        </ul>
+</body>
+</html>

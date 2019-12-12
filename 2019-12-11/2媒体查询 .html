@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>媒体查询</title>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background: yellow;
+        }
+       
+        @media screen and (max-width:768px) {
+            .box1 {
+                background: rosybrown;
+            }
+        }
+        @media screen and (min-width:767px) and (max-width:1199px) {
+            .box1 {
+                background: rgb(6, 228, 6);
+            }
+        }
+        @media screen and (min-width:1200px) {
+            .box1 {
+                background: red;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box1"></div>
+<script>
+
+ /*
+    @media screen and (max-width:768px) { };
+    @media:媒体;
+    screen：媒体类型(支持什么设备)
+    and：连接符  前后要有空格
+    (max-width:768px)：判断条件
+    {} 符合这个条件要改变的样式 
+    max-width: 600px 最大值600 小于这个值就变
+    max-width  屏幕最大（小于等于）的时候就干什么事情
+    min-width  屏幕最小多少（大于等于）的时候就干什么事情
+
+    样式多了之后可以使用：link media 的方式去写代码
+    <link media="screen and ( max-width:699px)" rel="stylesheet" href="1.css">
+*/
+
+</script>
+</body>
+
+</html>
