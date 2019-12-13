@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XHR</title>
+
+</head>
+
+<body>
+    注册的用户名<input id="user" type="text"><span id="s"></span></br>
+
+<script>
+
+    let re = /^[a-zA-Z][\w]{5,7}$/;
+    user.onfocus = function () {
+        // console.log(1)
+        user.style.border = '5px solid springgreen';
+        s.innerText = '';
+        // console.log(XMLHttpRequest);
+    }
+    /* 
+    发起ajax请求
+    1、创建一个电话 new XMLHttpRequest;
+    2、输入号码 open();
+    3、按拨打建 send();
+    4、等待 onload = function(){}
+    5、通话  function(){   }
+    */
+    user.onblur = function () {
+        // 去掉空格
+        let val = this.value.trim();
+        if (val && re.test(val)) {
+            // 创建
+            let xhr = new XMLHttpRequest;
+            // 拨号
+            xhr.open('get', '/get?user=' + this.value, true);
+            // 点击请求
+            xhr.send();
+            // 等待
+            xhr.onload = function () {
+                //  console.log(1)
+                // console.log(JSON.parse(xhr.responseText))
+                // 通话
+                let d = JSON.parse(xhr.responseText);
+                if (d.code === 0) {
+                    user.style.border = '1px solid red';
+                } else if (d.code === 1) {
+                    user.style.border = '1px solid green';
+                }
+            }
+        }
+        else {
+            s.innerText = '请检查输入的格式';
+            user.style.border = '5px solid springgreen';
+        }
+
+    }
+</script>
+</body>
+
+</html>
