@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>post</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/>
+
+    <script>
+    user.onblur = function(){
+        fetch('/post',{
+            method:'post',
+            body:''+new URLSearchParams({
+                user:this.value
+            }),
+            headres:{
+                'content-type':'application/x-www-form-urlencoded'
+            }
+        }).then(d=>d.json()).then(d=>{
+            console.log(d);
+        })
+    }
+
+
+
+
+
+    
+    // user.onblur = function(){
+    //     var xhr = new XMLHttpRequest;
+    //     xhr.open('post','/post',true);
+    //     xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    //     xhr.send('user='+this.value);
+    //     xhr.onload = function(){
+    //         console.log(1)
+    //         console.log(xhr.responseText);
+    //     }
+    // }
+    </script>
+</body>
+</html>
