@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>一</button>
+    <button>二</button>
+    <button>三</button>
+    <p id="p">第一张图片</p>
+    <input type="button" value="后退" id="btn">    
+<script>
+let ary = ['第一张图片','第二张图片','第三种图片'];
+
+const btns = document.querySelectorAll('button');
+let hash = window.location.hash;
+let index = 0;
+if(hash){
+    index = window.location.hash.match(/page\/(\d)/)[1];
+    p.innerHTML = ary[index]
+}else{
+    window.location.hash = 'page/0';
+}
+btns.forEach((ele,i)=>{
+    ele.onclick = function(){
+        p.innerHTML = ary[i];
+        window.location.hash = 'page/'+i
+    }
+})
+// 这里index取值一开始为0
+btn.onclick = function(){
+    index --;
+    if(index<0){
+        index = 0;
+       
+    }
+    window.location.hash = 'page/'+index;
+}
+window.onhashchange = function(){
+       index = window.location.hash.match(/page\/(\d)/)[1];
+       p.innerHTML = ary[index];
+    }
+
+</script>
+</body>
+</html>

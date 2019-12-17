@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BOM</title>
+</head>
+<body>
+<script>
+/* 
+   BOM 浏览器对象模型
+      基本不兼容
+
+     window.location
+        host -> host
+        hostname -> 当前host名字
+        href ->  url链接
+        origin -> 源
+        pathname -> 路径名字（一般是接口）
+        protocol -> 协议
+        port -> 端口
+        reload -> 刷新页面
+
+
+        search -> 查询信息  ?aaa# ?到#之间的信息，会刷新页面
+
+        ajax -> 最大的缺陷就是丧失浏览器历史记录，所谓不安全
+        
+        hash ->  锚信息，哈希值 #之后（包含#号）修改它不会刷新页面
+
+        当hash值变化的时候，会触发一个inhashchange事件
+
+        不管修改hsah还是改变search都会使浏览器记录用户操作（就可以使用前进后退键）
+
+        当切换路由的时候会从后端的静态资源中查找对应资源传到前台，后端会跳转路由导致会刷新页面，会影响用户体验，
+        所以应hash来充当跳转路由的动作来请求资源，这样一来第一能够成功请求
+        资源，二来，不刷新页面
+
+
+        window.navigator.userAgent  用户的内核信息 （字符串，容易被模拟）
+
+
+ */
+//  window.location.href = 'http://www.baidu.com' // 打开页面就跳转到别的页面
+
+ // FF:Firefox
+    //Chrome:Chrome
+    if(/chrome/i.test(window.navigator.userAgent) && /windows/i.test(window.navigator.userAgent)){
+        box.style.background = 'red';
+    }else if(/firefox/i.test(window.navigator.userAgent)){
+        box.style.background = 'green';
+    }else if(/iphone/i.test(window.navigator.userAgent)){
+        box.style.background = 'yellow';
+    }else if(/android/i.test(window.navigator.userAgent)){
+        box.style.background = 'skyblue';
+    }
+
+
+    document.onclick = function(){
+        // console.log( window.pageYOffset )
+        // document.documentElement.scrollTop = 0;
+        // window.scrollTo(0,0);
+        // console.log(window.location);
+        // window.location.href = 'http://www.baidu.com';
+        // console.log(window.navigator.userAgent)
+    }
+
+
+
+</script>
+</body>
+</html>
