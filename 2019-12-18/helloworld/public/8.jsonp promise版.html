@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+#box{
+    margin:0 auto;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#search{
+    height: 25px;
+    
+}
+ul{
+    
+    list-style: none;
+    width:166px;
+    /* border:1px solid #ccc; */
+}
+li{
+    border:1px solid #ccc;
+}
+</style>
+</head>
+<body>
+<div id="box">
+    <h2>某度搜索</h2>
+    <input type="text" id="search" autocomplete="off" autofocus/>
+    <ul id="ul">
+    
+    </ul>
+</div>
+<script>
+function jsonp(data,cb='callback'){
+    return new Promise((reslove,reject)=>{
+        let opt = {
+            url:'',
+            data:{}
+        }
+        Object.assign(opt,data);
+        let options = '';
+        let ary = [];
+        for(let attr in opt.data){
+            ary.push(attr +'='+ opt.data[attr])
+        }
+        options = ary.join('&');
+        let os = document.createElement('script');
+        let fnName = 'jQuery_'+ Date.now();
+        window[fnName] = function(d){
+            reslove(d)
+        }
+        os.src = opt.url + '?' + options +'&'+ cb + '='+fnName;
+        document.getElementsByTagName('head')[0].appendChild(os); 
+        os.remove();
+    })
+}
+
+search.onkeyup = function(){
+        jsonp({
+            url:'https://www.baidu.com/sugrec',
+            data:{
+                wd:this.value,
+                prod:'pc'
+            },
+        },'cb')
+        .then(data => {
+            const {g} = data;
+            let html = '';
+            // console.log(data)
+            if(!g){
+                ul.innerHTML = '';
+                return;
+            };
+            g.forEach(({q}) => {
+                html += '<li>'+q+'</li>';
+            });
+            ul.innerHTML = html;
+            ul.onclick = function(ev){
+                if(ev.target.tagName === 'LI'){
+                    // window.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText;
+                    window.open('https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText,'_blank');
+                }
+            }
+        })
+    }
+
+
+</script>
+    
+</body>
+</html>

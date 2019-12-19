@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+#box{
+    margin:0 auto;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#search{
+    height: 25px;
+    
+}
+ul{
+    
+    list-style: none;
+    width:166px;
+    /* border:1px solid #ccc; */
+}
+li{
+    border:1px solid #ccc;
+}
+</style>
+</head>
+<body>
+<div id="box">
+    <h2>某度搜索</h2>
+    <input type="text" id="search" autocomplete="off" autofocus/>
+    <ul id="ul">
+    
+    </ul>
+</div>
+<script>
+function jsonp(data,cb='callback'){
+  // 配置默认值，如果没传走默认值
+  let opt = {
+      url:'',
+      data:{},
+      success:function(){},
+  }
+  // 有配置就走配置，没有就偶组默认，就是说data里面有就走data没有就走opt。
+  Object.assign(opt,data);
+
+  /* 
+    data下{
+        wd:'haha',
+        id:11
+    }
+*/
+    let options = '';
+    let ary = [];
+    for (let attr in opt.data){
+        ary.push(attr +'='+ opt.data[attr]);
+    }
+    options = ary.join('&');
+    //console.log(ary)//["wd=aa", "prod=pc"]
+    //onsole.log(options)//wd=aa&prod=pc
+
+    let os = document.createElement('script');
+    //生成一个随机函数名
+    let fnName = 'jQuery_'+ Date.now();
+    // 放在window上方便外界用
+    window[fnName] = function (d){
+            opt.success(d); 
+            console.log(d)
+     }
+
+    os.src = opt.url + '?' + options +'&'+ cb + '='+fnName;
+    //console.log(os.src)//https://www.baidu.com/sugrec?wd=aa&prod=pc&cb=jQuery_1576737443486
+
+    document.getElementsByTagName('head')[0].appendChild(os);
+    os.remove();
+
+}
+
+search.onkeyup = function(){
+    jsonp({
+            url:'https://www.baidu.com/sugrec',
+            data:{
+                wd:this.value,
+                prod:'pc'
+            },
+            success(data){
+                const {g} = data;
+                let html = '';
+                console.log(data)
+                if(!g){
+                    ul.innerHTML = '';
+                    return;
+                };
+                g.forEach(({q}) => {
+                    html += '<li>'+q+'</li>';
+                });
+                ul.innerHTML = html;
+                ul.onclick = function(ev){
+                    if(ev.target.tagName === 'LI'){
+                        // window.location.href = 'https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText;
+                        window.open('https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText,'_blank');
+                    }
+                }
+            }
+        },'cb');
+
+
+}
+
+</script>
+    
+</body>
+</html>

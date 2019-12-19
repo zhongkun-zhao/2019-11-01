@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模糊搜索</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        margin:0 auto;
+        width: 300px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #search{
+        height: 25px;
+     
+    }
+    ul{
+       
+        list-style: none;
+        width:166px;
+        /* border:1px solid #ccc; */
+    }
+    li{
+        border:1px solid #ccc;
+    }
+    </style>
+
+</head>
+<body>
+    <div id="box">
+       <h2>某度搜索</h2>
+       <input type="text" id="search" autocomplete="off" autofocus/>
+       <ul id="ul">
+       
+       </ul>
+
+    </div>
+
+<script>
+ function fn(data){
+     console.log(data)
+     const {g} = data;
+     let html = '';
+     
+     if(!g){
+         ul.innerHTML = '';
+         return;
+     }
+     g.forEach(({q})=>{
+         console.log(q)
+         
+         html += '<li>'+q+'</li>';
+         console.log(html)
+     })
+    
+     ul.innerHTML = html;
+     ul.onclick = function(ev){
+         if(ev.target.tagName === 'LI'){
+            window.open('https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText,'_blank');
+         }
+     }
+
+ }    
+    
+ search.onkeyup = function(){
+     let s = document.createElement('script');
+     s.src = 'https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd='+ this.value +'&cb=fn'
+     document.getElementsByTagName('head')[0].appendChild(s);
+     s.remove();
+ }
+</script>
+</body>
+</html>
