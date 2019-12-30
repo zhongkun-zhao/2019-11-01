@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .box{
+    width:100px;
+    height:100px;
+    border:1px solid red;
+}
+    </style>
+</head>
+<body>
+    <script src="./vue.js"></script>
+   
+    <div id="app">
+     <button @click="b= !b">{{title}}</button>
+     <div v-if="b" class="box"></div>
+
+     <input type="text" v-model.lazy="val">
+     <div>{{val}}</div>
+    </div>
+    <script>
+    let a = new Vue({
+        el:'#app',
+        data:{
+            val:'',
+            title:'点击收起',
+            b:true,
+        }
+    
+    })
+    </script>
+</body>
+</html>

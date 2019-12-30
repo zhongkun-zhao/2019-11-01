@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+        <button>{{aa}}</button>
+        <h2>{{hw}}</h2> 
+        <hr/>
+        <!-- <ul>
+            <li v-for="(val,key) in ary">{{val}}</li>
+        </ul> -->
+        <div v-for="(val,key) in bb">{{val}}</div>
+        <div>{{message}}</div>
+        <span v-bind:title="message"> 鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+        
+    </div>
+
+    <div id="app2">
+      <div>{{a}}{{b}}</div>
+     
+    </div>
+
+    <div id="app3">
+       <p v-html="rhtml"></p>
+       <p v-bind:id="color">test</p>
+       <p>{{num+1}}</p>
+       <p>{{ok?'对':'错'}}</p>
+       <p>{{mesize.split('').reverse().join('')}}</p>
+       <p v-if="seem">哈哈</p>
+       <a v-bind:href="url">百度</a>
+       <div @click="click1">
+           <div @click.stop="click2">
+               点击
+           </div>
+       </div>
+      </div>
+
+
+    <div id="app4">        
+    <div class="test" v-bind:class="{active:isActive,green:isGreen}" style="width: 100px;height: 100px;">嗯嗯</div>
+    <div :style="{color:color,fontSize:size}">好</div>
+    </div>
+
+    <div id="app5">
+    <button v-on:click="counter += 1">数值{{ counter }}</button>
+    <button v-on:click="fn()">函数</button>
+    </div>
+
+    <script src="./vue.js"></script>
+    <style>
+    #red{
+        color: red;
+        font-size: 40px;
+        }
+    .active{
+        background: blue;
+    }
+    .test{
+        font-size: 30px;
+    }
+    .green{
+        color: red;
+    }
+
+    </style>
+    <script>
+    // 事件绑定
+    let vm = new Vue({
+            el:'#app5',
+            data:{
+                counter:0
+            },
+            methods:{
+                fn:function(){
+                  console.log(1)
+                  console.log(this.counter)
+                }
+            }
+       })
+
+     //class与style绑定
+    //    let vm = new Vue({
+    //         el:'#app4',
+    //         data:{
+    //             isActive:true,
+    //             isGreen:true,
+    //             color:'red',
+    //             size:'50px'
+    //         }
+    //    })
+
+
+    //  let v = new Vue({
+    //      el:'#app3',
+    //      data:{
+    //         rhtml:'<span style="color:red">赵 </span>',
+    //         color:'red',
+    //         num:10,
+    //         ok:2,
+    //         mesize:'abc',
+    //         seem: true,
+    //         url:'https://www.baidu.com/'
+    //      },
+    //      methods:{
+    //          click1 : function(){
+    //              console.log(1)
+    //          },
+    //          click2 : function(){
+    //              console.log(2)
+    //          }
+
+    //      }
+        
+    //  })
+     
+
+    // console.log(Vue)
+    // let v = new Vue({
+    //     el:'#app',
+    //     data:{
+            
+    //         aa:216,
+    //         hw:'你好，赵！',
+    //         bb:['生而为人','怎能不披荆斩棘','奋斗吧少年'],
+    //         message: '页面加载于 ' + new Date().toLocaleString()
+    //     }
+    // });
+    // setTimeout(() => {
+    //     v.bb.push('加油，你是最胖的')
+    // }, 3000);
+
+    // let data = {a:'赵'}
+    // let vm = new Vue({
+    //     el:'#app2',
+    //     data:data
+    // })
+    // vm.$watch('a',function(newval,oldval){
+    //     console.log(newval,oldval)
+    // })
+    // vm.a = '123'
+    // vm.b = '456'
+    
+    </script>
+</body>
+</html>

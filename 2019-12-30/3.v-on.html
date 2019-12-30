@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#box{
+    width:100px;
+    height:100px;
+    background:salmon;
+}
+#box2{
+    width:50px;
+    height:50px;
+    background:gold;
+}
+
+</style>
+</head>
+<body>
+    <div id="app">
+      <input 
+      type="text"
+      v-model="val"
+      @keyup.enter="add"
+      />
+      <ul>
+          <li v-for="(val) in ary">{{val}}</li>
+      </ul>
+      <hr>
+      <button @click.once="once">只能点一次</button>
+     <hr>
+     <input type="text" @input="change(1,$event)"/>
+    </div>
+<script src="./vue.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+           ary:[1],  
+           val:'',
+           vall:2 
+        },
+        methods:{
+          add(){
+              this.ary.push(this.val)    
+          },
+          once(){
+            alert(1)
+          },
+          change(nun,ev){
+                //如果不传参，第一个参数就是事件对象
+                //*** 如果传了参还想拿到事件对象，需要在模板中的事件函数内传一个$event
+                // console.log(nun)
+                console.log(ev.target.value);
+                // this.vall = ev.target.value;
+            }
+        }
+    })
+</script>
+</body>
+</html>
