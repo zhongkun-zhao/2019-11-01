@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+</style>
+</head>
+<body>
+    <div id="app">
+      <input 
+      type="text"
+      v-model='val'
+      >
+      {{val|fn1|fn2}}
+      <p>{{val}}</p>
+    </div>
+<script src="./vue.js"></script>
+<script>
+   /*
+        computed:
+            数据的第二次处理
+
+        管道符:（数据的第二次处理）
+            |
+            局部注册:
+                filters:{
+                    fn(val管道符之前的值){
+                        return 基于管道符之前的值进行二次处理
+                    }
+                }
+
+            全局注册:
+                Vue.filter('名字',function(val管道符之前的值){
+                    return 基于管道符之前的值进行二次处理
+                })
+
+                全局注册了之后，只要是当前Vue实例下的所有组件都能享受到这个全局注册的过滤器
+                局部注册，只有当前这个组件才能享受
+
+        class {
+            B(){
+                fn(){
+
+                }
+            }
+            A(){
+                fn2(){
+                
+                }
+            }
+        }
+   */
+//    Vue.filter('td',function(val){
+//       console.log(val)
+//       return val>10?''+val:'0'+val// 这里改变的就是管道符之前的值
+//    })
+    //注册全局的过滤器，要放在new Vue的上方
+
+    new Vue({
+       el:"#app",
+       data:{
+           val:'12'
+       },
+       filters:{
+            fn1(val){
+                return val.split('').reverse().join('');
+            },
+            fn2(val){
+                return val.replace(/\d+/,'')
+            }
+         
+       }
+    });
+
+
+</script>
+</body>
+</html>
