@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+     <div>我是父级</div>
+     <hr>
+     <aaa></aaa>
+     <bbb></bbb>
+     <!-- <ccc></ccc> -->
+    </div>
+    <template id="bbb">
+        <div>
+            我是b子组件通过 template:'#bbb'{{nnn}}   
+        </div>
+    </template>
+
+<script src="./vue.js"></script>
+<script>
+const ccc = {
+    template:`<div>我是ccc子组件在子组件aaa中创建</div>`
+}
+
+const aaa={
+    template:`
+    <div>{{num}}
+    <ccc></ccc>
+    </div>
+    `,
+    data(){
+        return{
+            num:'我是aaa子组件'
+        }
+    },
+    components:{
+        ccc
+    }
+}
+
+const bbb = {
+    template:"#bbb",
+    data(){
+        return{
+            nnn:'216'
+        }
+    },       
+}
+
+
+  // 全局注册
+  Vue.component('aaa',aaa) 
+  Vue.component('bbb',bbb) 
+//   Vue.component('ccc',ccc)     
+ new Vue({
+     el:'#app'
+ })
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <h2>父级元素</h2>
+       <button
+       @click="fn"
+       >{{num}}</button
+        >
+       <hr>
+       <aaa
+       :nn="num"
+       @childfn="forchild"
+       ></aaa
+        >
+    </div>
+     <template id="aaa">
+         <div>
+             <h4>子元素</h4>
+             <button
+             @click="add"
+             >{{nn}}</button>
+         </div>
+     </template>
+ 
+<script src="./vue.js"></script>
+<script>
+    const aaa = {
+        template:"#aaa",
+        props:['nn'],
+        data(){
+            return{
+                // 操作父级子集不变
+                cnn:this.nn
+            }
+        },
+        methods: {
+            add(){
+            this.cnn +=2;
+            this.$emit('childfn',this.cnn)
+            }
+        },
+    }
+
+
+  new Vue({
+      el:'#app',
+      data:{
+          num:0
+      },
+      methods: {
+          fn(){
+              this.num++;
+          },
+          // 这个函数与自己函数关联 接收自己数据
+          forchild(val){
+           this.num=val
+          }
+      },
+      components:{
+          aaa
+      }
+  })
+</script>
+</body>
+</html>
